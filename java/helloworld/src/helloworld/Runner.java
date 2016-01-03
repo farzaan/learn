@@ -1,8 +1,17 @@
 package helloworld;
 
-public class main {
+public class Runner {
 
 	public static void main(String[] args) {
+		testMeths();
+	}
+	
+	private static void testMeths(){
+		
+		new Variabes().testScoping(12);
+	}
+	
+	private static void somemeth(){
 		System.out.println("hello world, WTH");
 		
 		
