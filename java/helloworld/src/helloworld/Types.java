@@ -16,6 +16,11 @@ public class Types {
 		System.out.println(name + lastname);
 		System.out.println(lastname.length());
 	}
+	public void arrays(){
+		String[] Strarray = new String[12];
+		Strarray[3] = ("number3");
+		System.out.println(Strarray[3]);
+	}
 	
 
 }

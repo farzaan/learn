@@ -4,7 +4,7 @@ public class Runner {
 
 	public static void main(String[] args) {
 		testMeths();
-		somemeth();
+		//somemeth();
 	}
 	
 	private static void testMeths(){
@@ -12,6 +12,7 @@ public class Runner {
 		new Variabes().testScoping(12);
 		new Types().firstnum();
 		new Types().stringstest();
+		new Types().arrays();
 	}
 	
 	private static void somemeth(){
