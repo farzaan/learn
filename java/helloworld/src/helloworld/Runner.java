@@ -4,11 +4,14 @@ public class Runner {
 
 	public static void main(String[] args) {
 		testMeths();
+		somemeth();
 	}
 	
 	private static void testMeths(){
 		
 		new Variabes().testScoping(12);
+		new Types().firstnum();
+		new Types().stringstest();
 	}
 	
 	private static void somemeth(){
