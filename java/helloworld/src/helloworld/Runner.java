@@ -1,5 +1,7 @@
 package helloworld;
 
+import classtest.FirstClass;
+
 public class Runner {
 
 	public static void main(String[] args) {
@@ -8,7 +10,10 @@ public class Runner {
 	}
 	
 	private static void testMeths(){
-		
+		FirstClass myclass = new FirstClass();
+		myclass.isBo = false;
+		myclass.Examplestring = ("This is a set of data");
+		System.out.print(myclass.Examplestring);
 		new Variabes().testScoping(12);
 		new Types().firstnum();
 		new Types().stringstest();
