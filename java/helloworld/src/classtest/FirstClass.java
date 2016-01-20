@@ -7,5 +7,8 @@ public class FirstClass {
 		System.out.println(isBo);
 		
 	}
+	public void print(String Overloaded){
+		System.out.println(Overloaded);
+	}
 
 }
