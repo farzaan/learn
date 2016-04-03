@@ -1,4 +1,5 @@
 import edu.duke.*;
+import java.io.*;
 /**
  * Write a description of testforlesson here.
  * 
@@ -20,9 +21,20 @@ public ImageResource makeGray(ImageResource inImage){
     }
     return outImage;
 }
-public void testgray(){
-    ImageResource pic = new ImageResource();
-    ImageResource gray = makeGray(pic);
-    gray.draw();
+
+//public void testgray(){
+  //  ImageResource pic = new ImageResource();
+    //ImageResource gray = makeGray(pic);
+    //ray.draw();
+//}
+public void selectandconvert(){
+    DirectoryResource dric = new DirectoryResource();
+    for(File f : dric.selectedFiles()) {
+        ImageResource inImage = new ImageResource(f);
+        ImageResource grayim = makeGray(inImage);
+        grayim.draw();
+    }
+   
 }
 }
+
