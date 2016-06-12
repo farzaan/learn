@@ -27,4 +27,12 @@ public class tagfinder
         System.out.println("wrong for testcase "+ resuly);
     }
 }
+    public void realTesting(){
+        DirectoryResource dr = new DirectoryResource();
+        for(File f : dr.selectedFiles()){
+            FileResource fil = new FileResource(f);
+            String s = fil.asString();
+            System.out.println("this" + findProtein(s));
+        }
+    }
 }
