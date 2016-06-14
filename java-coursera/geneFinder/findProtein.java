@@ -3,8 +3,16 @@ import java.io.*;
 
 public class findProtein {
     public String finProtein(String dna){
-       int start = dna.indexOf("atg");
-       String next = dna.substring(start);
+       String nedna = dna.toLowerCase();
+       int start = nedna.indexOf("atg");
+       int end = nedna.indexOf(stopCodon(nedna));
+       return (nedna.substring(start, end +3));
+    }
+    public String stopCodon(String dna){
+       String nedna = dna.toLowerCase();
+       int endsa = dna.length() - 1;
+       int start = nedna.indexOf("atg");
+       String next = nedna.substring(start, endsa);
        int[] list = new int[] {next.indexOf("tag"), next.indexOf("taa"), next.indexOf("tga")};
        int i = 0;
        for(int f : list){
@@ -14,7 +22,7 @@ public class findProtein {
             }
            
         }
-       String endstring;
+       String endstring = new String();
        switch(i){
            case 1:endstring = "tag";
                   break;
@@ -23,19 +31,15 @@ public class findProtein {
            case 3:endstring = "tga";
                   break;    
         }
-        return endstring;
+      
+       return endstring;
     }
-    
     public void testing(){
-    String input = ("gatatgggctgctagtgtggtagtgatgctgctcgctgctgatccgtcgtaagtgtgtgtacgatgctagc");
-    String correct = ("ggctgc");
-    String resuly = finProtein(input);
-    if (correct.equals(resuly)) {
-        System.out.println("right for "+ input);
-    }
-    else {
-        System.out.println("wrong for testcase "+ resuly);
-    }
+    String input = ("AATGCTAGTTTAAATCTGA");
+    String nes = finProtein(input);
+    //String resuly = stopCodon(input);
+   // System.out.println(resuly);
+    System.out.println(nes);
 }
     public void realTesting(){
         DirectoryResource dr = new DirectoryResource();
