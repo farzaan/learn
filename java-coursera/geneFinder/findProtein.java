@@ -6,39 +6,38 @@ public class findProtein {
        String nedna = dna.toLowerCase();
        int start = nedna.indexOf("atg");
        int end = nedna.indexOf(stopCodon(nedna));
-       return (nedna.substring(start, end +3));
+       return nedna.substring(start, end +3);
     }
     public String stopCodon(String dna){
-       String nedna = dna.toLowerCase();
-       int endsa = dna.length() - 1;
+       
+        String nedna = dna.toLowerCase();
        int start = nedna.indexOf("atg");
-       String next = nedna.substring(start, endsa);
+       if(start == -1){
+          return ""; 
+        }
+        
+        
+       String next = nedna.substring(start);
        int[] list = new int[] {next.indexOf("tag"), next.indexOf("taa"), next.indexOf("tga")};
-       int i = 0;
+       String[] ends = new String[] {"tag", "taa", "tga"};
+       int i = 0;;
+       String endstring = new String();
        for(int f : list){
            i++;
            if(f != -1){
-              break ;
+               endstring = ends[i];
+               break;
             }
-           
+            
         }
-       String endstring = new String();
-       switch(i){
-           case 1:endstring = "tag";
-                  break;
-           case 2:endstring = "taa";
-                  break;
-           case 3:endstring = "tga";
-                  break;    
-        }
-      
-       return endstring;
+        
+      return endstring;
     }
     public void testing(){
     String input = ("AATGCTAGTTTAAATCTGA");
     String nes = finProtein(input);
-    //String resuly = stopCodon(input);
-   // System.out.println(resuly);
+    String resuly = stopCodon(input);
+   System.out.println(resuly);
     System.out.println(nes);
 }
     public void realTesting(){
