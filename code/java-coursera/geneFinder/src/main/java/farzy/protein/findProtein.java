@@ -17,6 +17,10 @@ public class findProtein {
        
     }
     
+    /*
+     * This will check for where the Codon ends
+     */
+    
     public String stopCodon(String dna){
        
        String nedna = dna.toLowerCase();
