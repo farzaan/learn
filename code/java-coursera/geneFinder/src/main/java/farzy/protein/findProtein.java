@@ -1,19 +1,33 @@
 package farzy.protein;
 
 import edu.duke.*;
+
+import java.util.ArrayList; 
+import java.util.List;
 import java.io.*;
 
 public class findProtein {
+	public void startRet(String dna){
+		int start = 0;
+		
+		while (true){
+			int loc = dna.indexOf("atg", start);
+			if(loc == -1){
+				break;
+			}
+			System.out.println(loc);
+		}
+		
+	}
     
-    static final String ST_CODON = "atg";
+    
     
     public String finProtein(String dna){
-       int CODONLEN = 3;
-       String nedna = dna.toLowerCase();
-       int start = nedna.indexOf(ST_CODON);
-       int end = nedna.indexOf(stopCodon(nedna));
-       
-       return nedna.substring(start, end + CODONLEN);
+    	String nedna = dna.toLowerCase();
+    	int start = nedna.indexOf("atg");
+    	String next = stopCodon(nedna.substring(start));
+		return next;
+    	
        
     }
     
@@ -24,7 +38,7 @@ public class findProtein {
     public String stopCodon(String dna){
        
        String nedna = dna.toLowerCase();
-       int start = nedna.indexOf(ST_CODON);
+       int start = nedna.indexOf("atg");
        if(start == -1){
           return ""; 
         }
@@ -40,7 +54,7 @@ public class findProtein {
        for(int f : list){
            i++;
        
-           if(f != -1){
+           if(f != -1 && f - start % 3 == 0){
                endstring = ends[i];
                break;
             }
