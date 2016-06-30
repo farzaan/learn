@@ -1,4 +1,4 @@
-package weather;
+package farzy.weather;
 
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -16,10 +16,23 @@ public class WeatherParser {
 	 */
 	public CSVRecord coldestHourInFile(CSVParser parser){
 		
+		CSVRecord ColdestSoFar = null;
+		for(CSVRecord currentRow : parser){
+			 if(ColdestSoFar == null){
+				 ColdestSoFar = currentRow;
+			 }
+			 else
+			 {
+				 double currentTemp = Double.parseDouble(currentRow.get("TemperatureF"));
+				 double Coldest = Double.parseDouble(currentRow.get("TemperatureF"));
+				 if(currentTemp < Coldest){
+					 ColdestSoFar = currentRow; 
+				 }
+			 }
+		}
 		
 		
-		
-		return null;
+		return ColdestSoFar;
 		
 	
 	}
@@ -62,6 +75,7 @@ determine the coldest temperature on that day.
 		CSVParser parser = fr.getCSVParser();
 		
 		CSVRecord csvrecord = coldestHourInFile(parser);
+		System.out.println(csvrecord.get("TimeEST"));
 		
 		
 		

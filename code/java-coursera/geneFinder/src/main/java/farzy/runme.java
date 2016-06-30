@@ -1,13 +1,17 @@
 package farzy;
 
 import farzy.protein.findProtein;
+import farzy.weather.WeatherParser;
 
 public class runme {
 
 	public static void main(String[] args){
-		findProtein fp = new findProtein();
+		WeatherParser wp = new WeatherParser();
 		
-		fp.testing();
+		wp.testColdestHourInFile();
+		
+		wp.testFileWithColdestTemperature();
+		
 		
 	  }
 }
