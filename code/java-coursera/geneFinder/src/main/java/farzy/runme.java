@@ -8,7 +8,7 @@ public class runme {
 	public static void main(String[] args){
 		WeatherParser wp = new WeatherParser();
 		
-		wp.testColdestHourInFile();
+		//wp.testColdestHourInFile();
 		
 		wp.testFileWithColdestTemperature();
 		

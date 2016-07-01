@@ -1,8 +1,11 @@
 package farzy.weather;
 
+import java.io.File;
+
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
+import edu.duke.DirectoryResource;
 import edu.duke.FileResource;
 
 public class WeatherParser {
@@ -44,7 +47,26 @@ method should return a String that is the name of the file from selected files t
 coldest temperature.
 	 */
 	public String fileWithColdestTemperature(){
-		return null;
+		DirectoryResource dr = new DirectoryResource();
+        CSVRecord coldestfile = null;
+        File coldestfilename = null;
+	    for(File f : dr.selectedFiles()){
+	           FileResource fil = new FileResource(f);
+	           CSVParser rt = fil.getCSVParser();
+	           CSVRecord x = coldestHourInFile(rt);
+	           if(coldestfile == null){
+	        	   coldestfile = x;
+	           }
+	           double Coldest = Double.parseDouble(coldestfile.get("TemperatureF"));
+	           double current = Double.parseDouble(x.get("TemperatureF"));
+	           if(Coldest > current){
+	        	   coldestfile = x;
+	        	   coldestfilename = f;
+	           }
+	           
+	    }
+		
+		return coldestfilename.getName();
 	}
 	
 	
@@ -55,7 +77,7 @@ determining the filename, you could call the method coldestHourInFileto
 determine the coldest temperature on that day.
 	 */
 	public void testFileWithColdestTemperature(){
-		
+		System.out.println(fileWithColdestTemperature());
 	}
 	
 	
