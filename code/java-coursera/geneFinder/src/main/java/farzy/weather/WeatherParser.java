@@ -48,25 +48,32 @@ coldest temperature.
 	 */
 	public String fileWithColdestTemperature(){
 		DirectoryResource dr = new DirectoryResource();
-        CSVRecord coldestfile = null;
-        File coldestfilename = null;
+        CSVRecord coldestRecord = null;
+        File coldestFile = null;
 	    for(File f : dr.selectedFiles()){
 	           FileResource fil = new FileResource(f);
 	           CSVParser rt = fil.getCSVParser();
 	           CSVRecord x = coldestHourInFile(rt);
-	           if(coldestfile == null){
-	        	   coldestfile = x;
+	          
+	           if(coldestRecord == null){
+	        	   coldestRecord = x;
 	           }
-	           double Coldest = Double.parseDouble(coldestfile.get("TemperatureF"));
+	           double Coldest = Double.parseDouble(coldestRecord.get("TemperatureF"));
 	           double current = Double.parseDouble(x.get("TemperatureF"));
+	           
+
+        	   coldestRecord = x;
+        	   coldestFile = f;
+
+	           
 	           if(Coldest > current){
-	        	   coldestfile = x;
-	        	   coldestfilename = f;
+	        	   coldestRecord = x;
+	        	   coldestFile = f;
 	           }
 	           
 	    }
 		
-		return coldestfilename.getName();
+		return coldestFile.getName();
 	}
 	
 	
