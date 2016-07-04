@@ -46,7 +46,7 @@ public class WeatherParser {
 method should return a String that is the name of the file from selected files that has the
 coldest temperature.
 	 */
-	public String fileWithColdestTemperature(){
+	public File fileWithColdestTemperature(){
 		DirectoryResource dr = new DirectoryResource();
         CSVRecord coldestRecord = null;
         File coldestFile = null;
@@ -73,7 +73,7 @@ coldest temperature.
 	           
 	    }
 		
-		return coldestFile.getName();
+		return coldestFile;
 	}
 	
 	
@@ -84,9 +84,29 @@ determining the filename, you could call the method coldestHourInFileto
 determine the coldest temperature on that day.
 	 */
 	public void testFileWithColdestTemperature(){
-		System.out.println(fileWithColdestTemperature());
+		FileResource x = new FileResource(fileWithColdestTemperature());
+		CSVParser parser = x.getCSVParser();
+		CSVRecord fd = coldestHourInFile(parser);
+		double current = Double.parseDouble(fd.get("TemperatureF"));
+		String nwno = Double.toString(current);
+		File n = fileWithColdestTemperature();
+		
+		String fileName = n.getName();
+		System.out.println(String.format("Coldest day was in file %s", fileName));
+		System.out.println(String.format("Coldest temperature on that day was %s", nwno));
+		for(CSVRecord de: parser){
+			double re = Double.parseDouble(de.get("TemperatureF"));
+			String ve = Double.toString(re);
+			System.out.println(ve);
+		}
 	}
 	
+	
+	public void printme(String toprint){
+		System.out.println(toprint);
+		
+		
+	}
 	
 	
 	
