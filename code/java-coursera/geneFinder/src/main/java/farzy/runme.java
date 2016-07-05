@@ -10,7 +10,9 @@ public class runme {
 		
 		//wp.testColdestHourInFile();
 		
-		wp.testFileWithColdestTemperature();
+		//wp.testFileWithColdestTemperature();
+		
+		wp.testLowestHumidityInFile();
 		
 		
 	  }

@@ -92,6 +92,58 @@ coldest temperature.
 	
 	
 	/***
+	 * Write a method named lowestHumidityInFile that has one parameter, a CSVParser named parser. This method returns the CSVRecord that has the lowest humidity. 
+	 * If there is a tie, then return the first such record that was found.
+
+Note that sometimes there is not a number in the Humidity column but instead there is the string “N/A”. This only happens very rarely.
+ You should check to make sure the value you get is not “N/A” before converting it to a number.
+
+Also note that the header for the time is either TimeEST or TimeEDT, depending on the time of year. 
+You will instead use the DateUTC field at the right end of the data file to get both the date and time of a temperature reading.
+
+
+	 */
+	public CSVRecord lowestHumidityInFile(CSVParser parser)
+	{
+		CSVRecord lowestHumidityRecord = null;
+		double lowestHumidity = 0.0;
+		for(CSVRecord currRecord:parser){
+			if (currRecord.get("Humidity") == "N/A"){
+				continue;
+			}
+			double currentHumidity = Double.parseDouble(currRecord.get("Humidity"));
+			if(lowestHumidity == currentHumidity){
+				continue;
+			}
+			if(lowestHumidity < currentHumidity){
+				lowestHumidity = currentHumidity;
+				
+				lowestHumidityRecord = currRecord;
+			}
+		}		
+		
+		return lowestHumidityRecord;
+	}	
+	
+	
+	
+	/***
+	 * You should also write a void method named testLowestHumidityInFile() to test this method that starts with these lines:
+and then prints the lowest humidity AND the time the lowest humidity occurred. For example, for the file weather-2014-01-20.csv, the output should be:
+
+
+	 */
+	public void testLowestHumidityInFile(){
+		FileResource fr = new FileResource();
+		CSVParser parser = fr.getCSVParser();
+		CSVRecord csv = lowestHumidityInFile(parser);
+		
+		String tprint = "Lowest Humidity was %s at %s";
+		System.out.println(String.format(tprint, csv.get("Humidity"),  csv.get("DateUTC")));
+	}
+	
+	
+	/***
 	 * You should also write a void method named
 testFileWithColdestTemperature()to test this method. Note that after
 determining the filename, you could call the method coldestHourInFileto
