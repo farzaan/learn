@@ -46,10 +46,11 @@ public class WeatherParser {
 method should return a String that is the name of the file from selected files that has the
 coldest temperature.
 	 */
-	public File fileWithColdestTemperature(){
+	public String fileWithColdestTemperature(){
 		DirectoryResource dr = new DirectoryResource();
         CSVRecord coldestRecord = null;
         File coldestFile = null;
+        
 	    for(File f : dr.selectedFiles()){
 	           FileResource fil = new FileResource(f);
 	           CSVParser rt = fil.getCSVParser();
@@ -69,11 +70,24 @@ coldest temperature.
 	           if(Coldest > current){
 	        	   coldestRecord = x;
 	        	   coldestFile = f;
-	           }
-	           
+	           }		
 	    }
+	    
+	    System.out.println(String.format("Coldest day was in file %s", coldestFile.getName()));
+		System.out.println(String.format("Coldest temperature on that day was %s", coldestRecord.get("TemperatureF")));
 		
-		return coldestFile;
+		System.out.println("All the Temperatures on the coldest day were:");
+		
+		FileResource fil = new FileResource(coldestFile);
+        CSVParser rt = fil.getCSVParser();
+		for(CSVRecord currentRow : rt){
+
+			System.out.println(String.format("%s %s: %s", currentRow.get("DateUTC"), currentRow.get("TimeEST"), currentRow.get("TemperatureF")));
+		}
+		
+		
+		
+		return coldestFile.getName();
 	}
 	
 	
@@ -84,21 +98,7 @@ determining the filename, you could call the method coldestHourInFileto
 determine the coldest temperature on that day.
 	 */
 	public void testFileWithColdestTemperature(){
-		FileResource x = new FileResource(fileWithColdestTemperature());
-		CSVParser parser = x.getCSVParser();
-		CSVRecord fd = coldestHourInFile(parser);
-		double current = Double.parseDouble(fd.get("TemperatureF"));
-		String nwno = Double.toString(current);
-		File n = fileWithColdestTemperature();
-		
-		String fileName = n.getName();
-		System.out.println(String.format("Coldest day was in file %s", fileName));
-		System.out.println(String.format("Coldest temperature on that day was %s", nwno));
-		for(CSVRecord de: parser){
-			double re = Double.parseDouble(de.get("TemperatureF"));
-			String ve = Double.toString(re);
-			System.out.println(ve);
-		}
+		fileWithColdestTemperature();
 	}
 	
 	
