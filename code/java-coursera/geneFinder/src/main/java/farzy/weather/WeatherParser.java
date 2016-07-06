@@ -124,8 +124,25 @@ You will instead use the DateUTC field at the right end of the data file to get 
 		
 		return lowestHumidityRecord;
 	}	
-	
-	
+	/***
+	 *  Write the method averageTemperatureInFile that has one parameter, a CSVParser named parser. T
+	 *  his method returns a double that represents the average temperature in the file. 
+	 *  You should also write a void method named testAverageTemperatureInFile() to test this method. 
+	 *  When this method runs and selects the file for January 20, 2014, the method should print out
+	 * 
+	 */
+	public double averageTemperatureInFile(CSVParser parser){
+		double mainTemp = 0.0;
+		double finalTemp = 0.0;
+		int ctr = 0;
+		for(CSVRecord tempRecord : parser){
+			ctr++;
+			double currentTemp = Double.parseDouble(tempRecord.get("TemperatureF"));
+			finalTemp = mainTemp + currentTemp;
+		}
+		double finale = finalTemp/ctr;
+		return finale; 
+	}
 	
 	/***
 	 * You should also write a void method named testLowestHumidityInFile() to test this method that starts with these lines:
@@ -133,6 +150,12 @@ and then prints the lowest humidity AND the time the lowest humidity occurred. F
 
 
 	 */
+	public void testaverageTemperatureInFile(){
+		FileResource fr = new FileResource();
+		CSVParser parser = fr.getCSVParser();
+		
+		System.out.println(String.format("Average temperature in file is %s", averageTemperatureInFile(parser)));
+	}
 	public void testLowestHumidityInFile(){
 		FileResource fr = new FileResource();
 		CSVParser parser = fr.getCSVParser();
@@ -182,5 +205,6 @@ determine the coldest temperature on that day.
 		
 		
 	}
+	
 
 }
