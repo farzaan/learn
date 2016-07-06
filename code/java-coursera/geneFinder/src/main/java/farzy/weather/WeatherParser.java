@@ -143,6 +143,32 @@ You will instead use the DateUTC field at the right end of the data file to get 
 		double finale = finalTemp/ctr;
 		return finale; 
 	}
+
+	/***
+	 * Write the method averageTemperatureWithHighHumidityInFile that has two parameters, a CSVParser named parser and an integer named value. T
+	 * his method returns a double that represents the average temperature of only those temperatures when the humidity was greater than or equal to value. 
+	 * You should also write a void method named testAverageTemperatureWithHighHumidityInFile() to test this method. 
+	 * When this method runs checking for humidity greater than or equal to 80 and selects the file for January 20, 2014, the method should print out
+	 */
+	public double averageTemperatureWithHighHumidityInFile(CSVParser parser, int value){
+		double mainTemp = 0.0;
+		double finTemp = 0.0;
+		int ctr = 0;
+		for(CSVRecord record: parser){
+			double currentHumidity = Double.parseDouble(record.get("Humidity"));
+			if(currentHumidity >= value){
+				ctr++;
+				double destrop = Double.parseDouble(record.get("TempertureF"));
+				finTemp = mainTemp + destrop;
+			}
+			else{
+				continue;
+			}
+		}
+		
+		
+		return finTemp/ctr;
+	}
 	
 	/***
 	 * You should also write a void method named testLowestHumidityInFile() to test this method that starts with these lines:
@@ -164,7 +190,6 @@ and then prints the lowest humidity AND the time the lowest humidity occurred. F
 		String tprint = "Lowest Humidity was %s at %s";
 		System.out.println(String.format(tprint, csv.get("Humidity"),  csv.get("DateUTC")));
 	}
-	
 	
 	/***
 	 * You should also write a void method named
