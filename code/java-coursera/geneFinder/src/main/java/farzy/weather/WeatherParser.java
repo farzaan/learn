@@ -158,17 +158,20 @@ You will instead use the DateUTC field at the right end of the data file to get 
 			double currentHumidity = Double.parseDouble(record.get("Humidity"));
 			if(currentHumidity >= value){
 				ctr++;
-				double destrop = Double.parseDouble(record.get("TempertureF"));
+				double destrop = Double.parseDouble(record.get("TemperatureF"));
 				finTemp = mainTemp + destrop;
 			}
 			else{
 				continue;
 			}
 		}
-		
+		if(finTemp == 0.0){
+			return 0.0;
+		}
 		
 		return finTemp/ctr;
 	}
+	
 	
 	/***
 	 * You should also write a void method named testLowestHumidityInFile() to test this method that starts with these lines:
@@ -176,6 +179,16 @@ and then prints the lowest humidity AND the time the lowest humidity occurred. F
 
 
 	 */
+	public void testaverageTemperatureWithHighHumidityInFile(){
+		FileResource fr = new FileResource();
+		CSVParser parser = fr.getCSVParser();
+		double answer = averageTemperatureWithHighHumidityInFile(parser, 56);
+		if(answer == 0.0){
+			System.out.println("No temperatures with that humidity");
+			
+		}
+		System.out.println(String.format("Average Temp when high Humidity is %s", answer));
+	}
 	public void testaverageTemperatureInFile(){
 		FileResource fr = new FileResource();
 		CSVParser parser = fr.getCSVParser();
