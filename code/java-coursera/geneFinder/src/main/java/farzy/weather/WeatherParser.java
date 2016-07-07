@@ -151,7 +151,6 @@ You will instead use the DateUTC field at the right end of the data file to get 
 	 * When this method runs checking for humidity greater than or equal to 80 and selects the file for January 20, 2014, the method should print out
 	 */
 	public double averageTemperatureWithHighHumidityInFile(CSVParser parser, int value){
-		double mainTemp = 0.0;
 		double finTemp = 0.0;
 		int ctr = 0;
 		for(CSVRecord record: parser){
@@ -159,7 +158,13 @@ You will instead use the DateUTC field at the right end of the data file to get 
 			if(currentHumidity >= value){
 				ctr++;
 				double destrop = Double.parseDouble(record.get("TemperatureF"));
-				finTemp = mainTemp + destrop;
+				if(finTemp != 0.0){
+					finTemp = finTemp + destrop;
+				}
+				else{
+					finTemp = destrop;
+				}
+				
 			}
 			else{
 				continue;
