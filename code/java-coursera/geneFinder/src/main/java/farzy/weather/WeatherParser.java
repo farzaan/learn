@@ -182,7 +182,7 @@ and then prints the lowest humidity AND the time the lowest humidity occurred. F
 	public void testaverageTemperatureWithHighHumidityInFile(){
 		FileResource fr = new FileResource();
 		CSVParser parser = fr.getCSVParser();
-		double answer = averageTemperatureWithHighHumidityInFile(parser, 56);
+		double answer = averageTemperatureWithHighHumidityInFile(parser, 80);
 		if(answer == 0.0){
 			System.out.println("No temperatures with that humidity");
 			
