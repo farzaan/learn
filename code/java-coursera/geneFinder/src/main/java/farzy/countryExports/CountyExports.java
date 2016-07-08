@@ -12,6 +12,7 @@ column is a list of export items for a country, and the Value (dollars) column i
 
 
  */
+
 public class CountyExports {
 	/*/
 	 * Write a method named countryInfo that has two parameters, parser is a CSVParser and country is a String. 
@@ -20,6 +21,43 @@ public class CountyExports {
 	 * countries export value.
 	 *  For example, using the file exports_small.csv and the country Germany, the program returns the string:
 	 */
+	/*
+	 * 5. Write a void method named bigExporters that has two parameters, parser is a CSVParser, and amount is a String in the format of a dollar sign, 
+	 * followed by an integer number with a comma separator every three digits from the right. An example of such a string might be “$400,000,000”. 
+	 * This method prints the names of countries and their Value amount for all countries whose Value (dollars) string is longer than the amount string.
+	 *  You do not need to parse either string value as an integer, just compare the lengths of the strings. For example, if bigExporters is called with the file
+	 *   exports_small.csv and amount with the string $999,999,999, then this method would print eight countries and their export values shown here
+	 */
+	 public void bigExporters(CSVParser parser,String amount){
+		 int y = amount.length();
+		 for(CSVRecord record: parser){
+			 int x = record.get("Value (dollars)").length();
+			 if (x >= y){
+				 System.out.println(String.format("%s %s", record.get("Country"), record.get("Value (dollars)")));
+			 }
+		 }
+		 
+	 }
+	
+	
+	
+	/*
+	 * Write a method named numberOfExporters, which has two parameters, parser is a CSVParser, and exportItem is a String. 
+	 * This method returns the number of countries that export exportItem. 
+	 * For example, using the file exports_small.csv, this method called with the item “gold” would return 3.
+	 */
+	public int numberOfExporters(CSVParser parser, String exportItem){
+		int cntCntr = 0;
+		for(CSVRecord record: parser){
+			if(record.get("Exports").contains(exportItem)){
+				cntCntr++;
+			}
+		} 
+		
+	return cntCntr;
+	}
+	
+	
 	/*
 	 * Write a void method named listExportersTwoProducts that has three parameters, parser is a CSVParser, exportItem1 is a String and exportItem2 is a String. 
 	 * This method prints the names of all the countries that have both exportItem1 and exportItem2 as export items. 
@@ -56,6 +94,11 @@ public class CountyExports {
 		listExportersOfTwoProducts(parser, "gold", "diamonds");
 		parser = fr.getCSVParser();
 		System.out.println(countryInfo(parser , "Germany"));
+		parser = fr.getCSVParser();
+		System.out.println(numberOfExporters(parser, "gold"));
+		parser = fr.getCSVParser();
+		bigExporters(parser, "$999,999,999");
+
 		
 	}
 }
