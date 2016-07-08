@@ -20,8 +20,21 @@ public class CountyExports {
 	 * countries export value.
 	 *  For example, using the file exports_small.csv and the country Germany, the program returns the string:
 	 */
-	
-	
+	/*
+	 * Write a void method named listExportersTwoProducts that has three parameters, parser is a CSVParser, exportItem1 is a String and exportItem2 is a String. 
+	 * This method prints the names of all the countries that have both exportItem1 and exportItem2 as export items. 
+	 * For example, using the file exports_small.csv, this method called with the items “gold” and “diamonds” would print the countries
+	 */
+	public void listExportersOfTwoProducts(CSVParser parser, String export1, String export2){
+		
+		for(CSVRecord record: parser){
+			String preSplit = record.get("Exports");
+			if(preSplit.contains(export1) && preSplit.contains(export2)){
+				System.out.println(record.get("Country"));
+				
+			}
+		}
+	}
 	
 	public String countryInfo(CSVParser parser , String Country){
 		String cntryInfo = null;
@@ -38,7 +51,11 @@ public class CountyExports {
 	
 	public void methTester(){
 		FileResource fr = new FileResource();
+		
 		CSVParser parser = fr.getCSVParser();
+		listExportersOfTwoProducts(parser, "gold", "diamonds");
+		parser = fr.getCSVParser();
 		System.out.println(countryInfo(parser , "Germany"));
+		
 	}
 }
