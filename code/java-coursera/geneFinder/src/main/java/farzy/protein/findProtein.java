@@ -25,8 +25,7 @@ public class findProtein {
     public String finProtein(String dna){
     	String nedna = dna.toLowerCase();
     	int start = nedna.indexOf("atg");
-    	String next = stopCodon(nedna.substring(start));
-		return next;
+    	stopCodon(nedna.substring(start));
     	
        
     }
@@ -53,14 +52,15 @@ public class findProtein {
        
        for(int f : list){
            i++;
-       
+           
            if(f != -1 && f - start % 3 == 0){
                endstring = ends[i];
+               System.out.println(endstring);
                break;
             }
             
         }
-        
+      System.out.println(endstring);
       return endstring;
     }
     
@@ -79,7 +79,7 @@ public class findProtein {
        for(File f : dr.selectedFiles()){
            FileResource fil = new FileResource(f);
            String s = fil.asString();
-           System.out.println("this is a protein => " + finProtein(s));
+           System.out.println("this is a protein => " + stopCodon(s));
         }
     }
 
