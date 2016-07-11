@@ -22,10 +22,18 @@ public class findProtein {
     
     
     
-    public String finProtein(String dna){
+    public void finProtein(String dna){
     	String nedna = dna.toLowerCase();
+    	String f = null;
+    	int ende = 0;
     	int start = nedna.indexOf("atg");
-    	stopCodon(nedna.substring(start));
+    	ende = stopIndex(nedna, start) + 3;
+    	while(start != -1){
+    		start = nedna.indexOf("atg");
+    		f = nedna.substring(start, ende);
+    		System.out.println(f);
+    		nedna = nedna.substring(ende);
+    	}
     	
        
     }
@@ -34,52 +42,41 @@ public class findProtein {
      * This will check for where the Codon ends
      */
     
-    public String stopCodon(String dna){
+    public int stopIndex(String dna, int index){
+       int stop1 = dna.indexOf("tga", index);
+       if(stop1 == -1 || (stop1 -index) % 3 != 0){
+    	   stop1 = dna.length();
+       }
+       int stop2 = dna.indexOf("tag", index);
+       if(stop2 == -1 || (stop2 -index) % 3 != 0){
+    	   stop2 = dna.length();
+       }
+       int stop3 = dna.indexOf("taa", index);
+       if(stop3 == -1 || (stop3 -index) % 3 != 0){
+    	   stop3 = dna.length();
+       }
+       return Math.min(stop1, Math.min(stop2, stop3));
        
-       String nedna = dna.toLowerCase();
-       int start = nedna.indexOf("atg");
-       if(start == -1){
-          return ""; 
-        }
-        
-        
-       String next = nedna.substring(start);
-       int[] list = new int[] {next.indexOf("tag"), next.indexOf("taa"), next.indexOf("tga")};
-       String[] ends = new String[] {"tag", "taa", "tga"};
-       int i = 0;
-
-       String endstring = new String();
+    	
        
-       for(int f : list){
-           i++;
-           
-           if(f != -1 && f - start % 3 == 0){
-               endstring = ends[i];
-               System.out.println(endstring);
-               break;
-            }
-            
-        }
-      System.out.println(endstring);
-      return endstring;
+       
     }
-    
+    /*
     public void testing(){
         String input = ("AATGCTAGTTTAAATCTGA");
         String nes = finProtein(input);
         
-        String resuly = stopCodon(input);
-        System.out.println(resuly);
+       
         System.out.println(nes);
     }
-
+*/
     public void realTesting(){
        DirectoryResource dr = new DirectoryResource();
         
        for(File f : dr.selectedFiles()){
            FileResource fil = new FileResource(f);
            String s = fil.asString();
-           System.out.println("this is a protein => " + stopCodon(s));
+           finProtein(s);
         }
     }
 
