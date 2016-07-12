@@ -25,9 +25,8 @@ public class findProtein {
     public void finProtein(String dna){
     	String nedna = dna.toLowerCase();
     	String f = null;
-    	int ende = 0;
     	int start = nedna.indexOf("atg");
-    	ende = stopIndex(nedna, start) + 3;
+    	int ende = stopIndex(nedna, start);
     	while(start != -1){
     		start = nedna.indexOf("atg");
     		f = nedna.substring(start, ende);
