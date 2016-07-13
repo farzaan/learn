@@ -26,12 +26,18 @@ public class findProtein {
     	String nedna = dna.toLowerCase();
     	String f = null;
     	int start = nedna.indexOf("atg");
+    	
     	int ende = stopIndex(nedna, start);
     	while(start != -1){
-    		start = nedna.indexOf("atg");
-    		f = nedna.substring(start, ende);
-    		System.out.println(f);
+    		
+    		System.out.println(start);
+    		System.out.println(ende);
+    		
+    		System.out.println(nedna.substring(start, ende+3));
     		nedna = nedna.substring(ende);
+    		
+    		start = nedna.indexOf("atg");
+    		ende = stopIndex(nedna, start);
     	}
     	
        
