@@ -152,30 +152,30 @@ public class Pixel {
      * Resets the value of the pixel's red component to the value passed as a parameter.
      * If it is not in the range of 0-255 it is changed to be in that range.
      * 
-     * @param r the red value
+     * @param clrSet the red value
      */
-    public void setRed (int r) {
-        red = clamp(r);
+    public void setRed(int clrSet) {
+        red = clamp(clrSet);
     }
 
     /**
      * Resets the value of the pixel's green component to the value passed as a parameter.
      * If it is not in the range of 0-255 it is changed to be in that range.
      * 
-     * @param g the green value
+     * @param clrSet the green value
      */
-    public void setGreen (int g) {
-        green = clamp(g);
+    public void setGreen (int clrSet) {
+        green = clamp(clrSet);
     }
 
     /**
      * Resets the value of the pixel's blue component to the value passed as a parameter.
      * If it is not in the range of 0-255 it is changed to be in that range.
      * 
-     * @param b the blue value
+     * @param clrSet the blue value
      */
-    public void setBlue (int b) {
-        blue = clamp(b);
+    public void setBlue (int clrSet) {
+        blue = clamp(clrSet);
     }
 
     /**
@@ -211,7 +211,9 @@ public class Pixel {
     }
 
     // clamps the given value to a valid pixel value
-    private int clamp (int value) {
-        return Math.max(0,  Math.min(value, MAX_VALUE));
+    private int clamp (int clrSet) {
+        return Math.max(0,  Math.min(clrSet, MAX_VALUE));
     }
+
+	
 }

@@ -185,7 +185,7 @@ public class ImageResource {
      * @return the Pixel at the given (x, y) coordinates
      */
     public Pixel getPixel (int x, int y) {
-        // System.out.printf("get %d %d\n",x,y);
+        //System.out.printf("get %d %d\n",x,y);
         return myPixels[y * getWidth() + x];
     }
 
