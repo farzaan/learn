@@ -22,7 +22,8 @@ public class MakeGray{
 	
 	public void testGray(){
 		ImageResource in = new ImageResource();
-		makeGray(in).draw();
+		ImageResource er = makeGray(in);
+		er.draw();
 	}
 	
 	
