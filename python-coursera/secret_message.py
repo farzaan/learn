@@ -1,7 +1,7 @@
 import os
 def rename_thy_files():
 	#makes list of file name
-	path = "prank"
+	path = "/home/farzaan/Downloads"
 	fileList = os.listdir(path)
 	#rename them nao
 	for file in fileList:
@@ -10,4 +10,3 @@ def rename_thy_files():
 		os.rename(path + "/" + file, newFilename)
 	return file
 print(rename_thy_files())
-
