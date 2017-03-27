@@ -6,10 +6,13 @@ def makeashape():
 	brad = turtle.Turtle()
 	brad.color("pink")
 	brad.shape("turtle")
-	i = 4
-	while (i > 0):
-		brad.forward(100)
-		brad.right(90)
+	brad.speed(10)
+	i = 36
+	while(i > 0):
+		brad.right(10)
+		for w in [1,2,3,4]:
+			brad.forward(100)
+			brad.right(90)
 		i -= 1
 	biell = turtle.Turtle()
 	biell.shape("arrow")
@@ -24,7 +27,7 @@ def makeashape():
 		RJ.forward(200)
 		RJ.left(120)
 		b -= 1
-		
+	
 
 	window.exitonclick()
 makeashape() 
