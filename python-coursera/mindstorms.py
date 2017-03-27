@@ -1,6 +1,6 @@
 import turtle
 
-def makeasquare():
+def makeashape():
 	window = turtle.Screen()
 	window.bgcolor("red")
 	brad = turtle.Turtle()
@@ -11,7 +11,20 @@ def makeasquare():
 		brad.forward(100)
 		brad.right(90)
 		i -= 1
+	biell = turtle.Turtle()
+	biell.shape("arrow")
+	biell.color("blue")
+	biell.speed(8)
+	biell.circle(200)
 	
-	
+	RJ = turtle.Turtle()
+	RJ.color("black")
+	b = 3
+	while(b > 0):
+		RJ.forward(200)
+		RJ.left(120)
+		b -= 1
+		
+
 	window.exitonclick()
-makeasquare() 
+makeashape() 
