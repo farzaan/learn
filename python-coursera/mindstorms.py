@@ -10,10 +10,12 @@ def makeashape():
 	i = 36
 	while(i > 0):
 		brad.right(10)
-		for w in [1,2,3,4]:
+		for w in [1,2,3]:
 			brad.forward(100)
-			brad.right(90)
+			brad.right(120)
 		i -= 1
+	brad.right(90)
+	brad.forward(600)
 	biell = turtle.Turtle()
 	biell.shape("arrow")
 	biell.color("blue")
