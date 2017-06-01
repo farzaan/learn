@@ -14,5 +14,9 @@ def check_profanity(text_to_check):
 	host = urllib.parse.quote(text_to_check)
 	connection = urllib.request.urlopen("http://www.wdylike.appspot.com/?q=" + host)
 	output = connection.read()
-	print(output)
+	connection.close()
+	if b'false' in output:
+		print("no curse words found")
+	else:
+		print("BAD WORD ALERT!!")
 read_text()
