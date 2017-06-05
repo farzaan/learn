@@ -10,10 +10,10 @@ avatar= media.Movie("Avatar", "A story about a marine on a planet", \
  "https://upload.wikimedia.org/wikipedia/en/b/b0/Avatar-Teaser-Poster.jpg", "https://www.youtube.com/watch?v=5PSNL1qE6VY")
 
 inception = media.Movie("Inception", "A story of a young boy and a mean world", \
- "https://en.wikipedia.org/wiki/File:Inception_(2010)_theatrical_poster.jpg", "https://www.youtube.com/watch?v=YoHD9XEInc0")
+ "https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg", "https://www.youtube.com/watch?v=YoHD9XEInc0")
 
 forrest_gump = media.Movie("Forrest Gump", "A story of a young boy and his adventures in life", \
- "https://en.wikipedia.org/wiki/File:Forrest_Gump_poster.jpg", "https://www.youtube.com/watch?v=bLvqoHBptjg")
+ "https://upload.wikimedia.org/wikipedia/en/6/67/Forrest_Gump_poster.jpg", "https://www.youtube.com/watch?v=bLvqoHBptjg")
 
 
 # Adding the movie intances to the movies list
