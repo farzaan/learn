@@ -78,6 +78,8 @@ a {
 
 .img-row-3 {
   height: 50%;
+  max-width: 300px;
+  height: 180px;
 }
 
 .colortext {
@@ -119,10 +121,6 @@ a {
   height: 150px;
 }
 
-.img-responsive {
-  max-width: 300px;
-  height: 180px;
-}
 .col-md-15 {
   border: 0 solid blue;
 }
