@@ -4,9 +4,10 @@
 
 To run the code execute the following:
 	
-	```
+```python
 	python logs_analysis.py
-	```
+
+```
 
 The results are in the following files:
 
