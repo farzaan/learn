@@ -2,23 +2,25 @@
 
 ## Project Description
 
-Describe the purpose of your project. Give a description of the news database.
-Describe what your script does. Include the list of questions it answers it the report it generates.
-Be sure to mention technologies that you used. If a potential employer is looking over your READMEs in your portfolio, this can quickly tell them what you have experience in.
++ The purpose of this project is top work with databases and glean information from them.
++ The script executes sql queries on the 'news' datbase and formats and writes the results to a text file. It gives the top 3 most viewed articles of the website, the top 3 most viewed authors of the website and the day that "404 NOT FOUND" errors reached greater than 1%.
++ This project used a virtual machine through vagrant, postgreSQL, and python.
 
 ## Requirements
 
-provide a list of requirements, such as PostgreSQL, Python, etc.
++ PostgreSQL
+
++ Python 2.7.12
+
++ psycopg2
 
 ## Database Set-up
 
-how to create the news database
-where to get the newsdata.sql file with the database schema and data.
-you could include a compressed (e.g. zipped) version of newsdata.sql in your repository, or include a link to where the user can download this file.
-how to import the schema and data into the database
-how to create the required views statements
+Download [newsdata.sql](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip "newsdata.sql")
 
-The results are in the following files:
+To load the data, use the command ``` psql -d news -f newsdata.sql ```
+
+**The results are in the following files:**
 
 * author_report.txt
 * error_rates.txt
@@ -31,6 +33,5 @@ To run the code execute the following:
 	
 ```python
 	python logs_analysis.py
-
 ```
 
