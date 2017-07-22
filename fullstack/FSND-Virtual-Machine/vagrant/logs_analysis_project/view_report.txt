@@ -1,0 +1,4 @@
+TITLE,VIEWS
+"""",C,a,n,d,i,d,a,t,e, ,i,s, ,j,e,r,k,",", ,a,l,l,e,g,e,s, ,r,i,v,a,l,"""", ,-,-, ,6,7,7,2,9,4, ,v,i,e,w,s
+"""",B,e,a,r,s, ,l,o,v,e, ,b,e,r,r,i,e,s,",", ,a,l,l,e,g,e,s, ,b,e,a,r,"""", ,-,-, ,5,0,7,6,0,2, ,v,i,e,w,s
+"""",B,a,d, ,t,h,i,n,g,s, ,g,o,n,e,",", ,s,a,y, ,g,o,o,d, ,p,e,o,p,l,e,"""", ,-,-, ,3,4,0,1,9,6, ,v,i,e,w,s

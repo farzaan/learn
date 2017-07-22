@@ -60,11 +60,17 @@ def error_rates():
 
 def write_data_to_file(data, fName, cols=['TITLE', 'VIEWS']):
 
+    lb = "\n" # lineBreak
+    print("Writing to file", fName)
     with open(fName, 'wb') as out:
-        csv_out = csv.writer(out)
-        csv_out.writerow(cols)
+        #csv_out = csv.writer(out)
+        out.write(cols + lb)
+
         for row in data:
-            csv_out.writerow(row)
+            title = row[0]
+            value = row[1]
+            strData = "\"{0}\" -- {1} {2} {3}".format(title, value, cols[1].lower(), lb)
+            out.write(strData + lb)
 
 
 if __name__ == '__main__':
