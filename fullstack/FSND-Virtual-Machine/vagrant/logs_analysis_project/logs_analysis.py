@@ -58,13 +58,15 @@ def error_rates():
 
 
 
-def write_data_to_file(data, fName, cols=['TITLE', 'VIEWS']):
+def write_data_to_file(data, fName, strHeader, cols=['TITLE', 'VIEWS']):
 
     lb = "\n" # lineBreak
     print("Writing to file", fName)
     with open(fName, 'wb') as out:
         #csv_out = csv.writer(out)
-        out.write(cols + lb)
+        #strHeader = "\"Top {0}\" -- {1} {2}".format(cols[0], cols[1], lb)
+        out.write(strHeader + lb)
+        out.write('-' * len(strHeader) + lb)
 
         for row in data:
             title = row[0]
@@ -76,11 +78,11 @@ def write_data_to_file(data, fName, cols=['TITLE', 'VIEWS']):
 if __name__ == '__main__':
 
     data = top_articles()
-    write_data_to_file(data, 'view_report.txt', ['TITLE', 'VIEWS'])
+    write_data_to_file(data, 'view_report.txt', "Top three articles sorted by views", ['ARTICLE', 'VIEWS'])
 
     info = top_authors()
-    write_data_to_file(info, 'author_report.txt', ['AUTHOR', 'VIEWS'])
+    write_data_to_file(info, 'author_report.txt', "Author Rank by Article Views", ['AUTHOR', 'VIEWS'])
 
     errors = error_rates()
-    write_data_to_file(errors, 'error_rates.txt', ['DATE', 'ERROR_RATE'])
+    write_data_to_file(errors, 'error_rates.txt', "Dates With More Than 1%% Error Rate", ['DATE', 'ERROR_RATE'])
 
