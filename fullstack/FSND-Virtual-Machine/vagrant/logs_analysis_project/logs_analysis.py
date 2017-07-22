@@ -1,11 +1,21 @@
-import psycopg2
+#!/usr/bin/env python
 
-import csv
+import psycopg2
 
 DBNAME = "news"
 
 
 def get_data_by_query(strSQL):
+    """Form a complex number.
+
+    Keyword arguments:
+    real -- the real part (default 0.0)
+    imag -- the imaginary part (default 0.0)
+
+    Returns:
+        A list of tuples containing the results of the query.    
+    """    
+
 
     DB = psycopg2.connect(database=DBNAME)
     c = DB.cursor()
@@ -18,11 +28,19 @@ def get_data_by_query(strSQL):
 
 
 def top_articles():
+    """Perform and output sql query for top articles
 
-    strSQL = "select a.title,\
-             count(a.title) as cnt from articles as a, log\
-             as l where a.slug = replace(l.path, '/article/', '')\
-             group by a.title order by cnt desc limit 3"
+    Keyword arguments:
+    None
+
+    Returns:
+        A list of tuples containing the results of the query.    
+    """    
+
+    strSQL = """select a.title,
+             count(a.title) as cnt from articles as a, log
+             as l where a.slug = replace(l.path, '/article/', '')
+             group by a.title order by cnt desc limit 3"""
 
     posts = get_data_by_query(strSQL)
 
@@ -30,12 +48,19 @@ def top_articles():
 
 
 def top_authors():
+    """Perform and output sql query for top authors
 
-    strSQL = "select c.name,\
-             count(c.id) as cnt from articles as a, log as l, authors as c \
-             where a.slug = replace(l.path,'/article/', '')\
-             and a.author = c.id group \
-             by c.name, c.id order by cnt desc limit 3"
+    Keyword arguments:
+    None
+
+    Returns:
+        A list of tuples containing the results of the query.    
+    """    
+    strSQL = """select c.name,
+             count(c.id) as cnt from articles as a, log as l, authors as c 
+             where l.path = '/article/' || a.slug
+             and a.author = c.id group 
+             by c.name, c.id order by cnt desc limit 3"""
 
     posts = get_data_by_query(strSQL)
 
@@ -44,13 +69,21 @@ def top_authors():
 
 
 def error_rates():
+    """Perform and output sql query for error rates.
 
-    strSQL = "select date(time) ,\
-             round(CAST(float8(100 * CAST(SUM\
-             (CAST((status = '404 NOT FOUND')AS INT))\
-             as DOUBLE PRECISION) / SUM(CAST((status ='200 OK')  AS INT)))\
-             as numeric), 2) as p\
-             from log group by date(time) order by p desc limit 1"
+    Keyword arguments:
+    None
+    
+    Returns:
+        A list of tuples containing the results of the query.    
+    """    
+
+    strSQL = """select date(time),
+            round(CAST(float8(100 * CAST(SUM(CAST((status = '404 NOT FOUND')  AS INT)) as DOUBLE PRECISION)
+             / count(status)) as numeric), 2)
+            as s
+            from log
+            group by date(time) order by s desc limit 1"""
 
     error_rates = get_data_by_query(strSQL)
 
@@ -59,12 +92,20 @@ def error_rates():
 
 
 def write_data_to_file(data, fName, strHeader, cols=['TITLE', 'VIEWS'], showPercent=False):
+    """Writes sql query output to text fi;es.
+
+    Keyword arguments:
+    data -- the real part (default 0.0)
+    fName -- the imaginary part (default 0.0)
+    strHeader -- the header for output file
+    cols -- description for columns of output
+    showPercent -- boolean checking for wether to write output as percent
+    """    
 
     lb = "\n" # lineBreak
     print("Writing to file", fName)
     with open(fName, 'wb') as out:
-        #csv_out = csv.writer(out)
-        #strHeader = "\"Top {0}\" -- {1} {2}".format(cols[0], cols[1], lb)
+        
         out.write(strHeader + lb)
         out.write('-' * len(strHeader) + lb)
 
@@ -81,11 +122,27 @@ def write_data_to_file(data, fName, strHeader, cols=['TITLE', 'VIEWS'], showPerc
 if __name__ == '__main__':
 
     data = top_articles()
-    write_data_to_file(data, 'view_report.txt', "Top three articles sorted by views", ['ARTICLE', 'VIEWS'])
+    write_data_to_file(
+    data, 
+    'view_report.txt', 
+    "Top three articles sorted by views", 
+    ['ARTICLE', 'VIEWS']
+    )
 
     info = top_authors()
-    write_data_to_file(info, 'author_report.txt', "Author Rank by Article Views", ['AUTHOR', 'VIEWS'])
+    write_data_to_file(
+    info,
+    'author_report.txt',
+    "Author Rank by Article Views",
+    ['AUTHOR', 'VIEWS']
+    )
 
     errors = error_rates()
-    write_data_to_file(errors, 'error_rates.txt', "Dates With More Than 1% Error Rate", ['DATE', 'ERROR_RATE'], True)
+    write_data_to_file(
+    errors,
+    'error_rates.txt',
+    "Dates With More Than 1% Error Rate",
+    ['DATE', 'ERRORS'],
+    True
+    )
 

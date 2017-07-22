@@ -1,4 +1,4 @@
 Dates With More Than 1% Error Rate
 ----------------------------------
-"2016-07-17" -- 2.32% error_rate 
+"2016-07-17" -- 2.32% errors 
 
