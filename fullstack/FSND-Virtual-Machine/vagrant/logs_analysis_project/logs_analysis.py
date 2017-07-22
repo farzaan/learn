@@ -58,7 +58,7 @@ def error_rates():
 
 
 
-def write_data_to_file(data, fName, strHeader, cols=['TITLE', 'VIEWS']):
+def write_data_to_file(data, fName, strHeader, cols=['TITLE', 'VIEWS'], showPercent=False):
 
     lb = "\n" # lineBreak
     print("Writing to file", fName)
@@ -71,7 +71,10 @@ def write_data_to_file(data, fName, strHeader, cols=['TITLE', 'VIEWS']):
         for row in data:
             title = row[0]
             value = row[1]
-            strData = "\"{0}\" -- {1} {2} {3}".format(title, value, cols[1].lower(), lb)
+            if(showPercent):
+                strData = "\"{0}\" -- {1}% {2} {3}".format(title, value, cols[1].lower(), lb)
+            else:
+                strData = "\"{0}\" -- {1} {2} {3}".format(title, value, cols[1].lower(), lb)
             out.write(strData + lb)
 
 
@@ -84,5 +87,5 @@ if __name__ == '__main__':
     write_data_to_file(info, 'author_report.txt', "Author Rank by Article Views", ['AUTHOR', 'VIEWS'])
 
     errors = error_rates()
-    write_data_to_file(errors, 'error_rates.txt', "Dates With More Than 1%% Error Rate", ['DATE', 'ERROR_RATE'])
+    write_data_to_file(errors, 'error_rates.txt', "Dates With More Than 1% Error Rate", ['DATE', 'ERROR_RATE'], True)
 
