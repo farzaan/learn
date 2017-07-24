@@ -113,17 +113,15 @@ def write_data_to_file(data, fName, strHeader,
             title = row[0]
             value = row[1]
             if(showPercent):
-                strData =
-                "\"{0}\" -- {1}% {2} {3}".format(title,
-                                                 value,
-                                                 cols[1].lower(),
-                                                 lb)
+                strData = "\"{0}\" -- {1}% {2} {3}".format(title,
+                                                           value,
+                                                           cols[1].lower(),
+                                                           lb)
             else:
-                strData =
-                "\"{0}\" -- {1} {2} {3}".format(title,
-                                                value,
-                                                cols[1].lower(),
-                                                lb)
+                strData = "\"{0}\" -- {1} {2} {3}".format(title,
+                                                          value,
+                                                          cols[1].lower(),
+                                                          lb)
             out.write(strData + lb)
 
 
