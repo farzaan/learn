@@ -1,10 +1,10 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
 def main():
-	try:
+    try:
 
-	except KeyboardInterrupt:
-		
+    except KeyboardInterrupt:
+        
 
 if __name__ == '__main__':
-	main()
+    main()
