@@ -40,9 +40,9 @@ class webServerHandler(BaseHTTPRequestHandler):
                     self.send_header('Content-type', 'text/html')
                     self.end_headers()
                     output = "<html><body>"
-                    output += "<h1>"
+                    output += "<h2>"
                     output += myRestaurantQuery.name
-                    output += "</h1>"
+                    output += "</h2>"
                     output += "<form method='POST' enctype='multipart/form-data' action = '/restaurants/%s/edit' >" % restaurantIDPath
                     output += "<input name = 'newRestaurantName' type='text' placeholder = '%s' >" % myRestaurantQuery.name
                     output += "<input type = 'submit' value = 'Rename'>"
