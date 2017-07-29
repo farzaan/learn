@@ -3,6 +3,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Restaurant, MenuItem
 
+import logging
+LOG_FILENAME = 'errors.log'
+logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)    
+#from logging.handlers import RotatingFileHandler
+
 app = Flask(__name__)
 
 engine = create_engine('sqlite:///restaurantmenu.db')
@@ -30,10 +35,15 @@ def menuItemJSON(restaurant_id, menu_id):
 @app.route('/')
 @app.route('/restaurants/<int:restaurant_id>/menu')
 def restaurantMenu(restaurant_id):
-    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
-    items = session.query(MenuItem).filter_by(restaurant_id=restaurant_id)
-    return render_template(
-        'menu.html', restaurant=restaurant, items=items, restaurant_id=restaurant_id)
+    try:
+        logging.debug('Inside restaurantMenu', restaurant_id)
+        restaurant = session.query(Restaurant).filter_by(id=restaurant_id).first()
+        logging.debug('Restaurants queried', restaurant)
+        items = session.query(MenuItem).filter_by(restaurant_id=restaurant_id)
+    except  Exception as err:
+        logging.debug('Inside restaurantMenu', err)
+
+    return render_template('menu.html', restaurant=restaurant, items=items, restaurant_id=restaurant_id)
 
 
 @app.route('/restaurants/<int:restaurant_id>/new', methods=['GET', 'POST'])
@@ -84,5 +94,16 @@ def deleteMenuItem(restaurant_id, menu_id):
 
 
 if __name__ == '__main__':
-    app.debug = True
+    app.debug = True    
+
+    LOG_FILENAME = 'errors.log'
+
+    logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)    
+    #formatter = logging.Formatter("[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
+    #handler = RotatingFileHandler(LOG_FILENAME, maxBytes=10000000, backupCount=5)
+    #handler.setLevel(logging.DEBUG)
+    #handler.setFormatter(formatter)
+    #app.logger.addHandler(handler)    
+
+
     app.run(host='0.0.0.0', port=5000)
