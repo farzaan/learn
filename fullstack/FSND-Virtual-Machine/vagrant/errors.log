@@ -140,3 +140,49 @@ INFO:werkzeug:10.0.2.2 - - [29/Jul/2017 18:57:13] "GET /static/img3.jpg HTTP/1.1
 INFO:werkzeug:10.0.2.2 - - [29/Jul/2017 18:58:17] "POST /restaurants/1/1/edit HTTP/1.1" 302 -
 INFO:werkzeug:10.0.2.2 - - [29/Jul/2017 18:58:17] "GET /restaurants/1/menu HTTP/1.1" 200 -
 INFO:werkzeug:10.0.2.2 - - [29/Jul/2017 18:58:17] "GET /static/img3.jpg HTTP/1.1" 404 -
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 769-024-554
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:31:30] "GET /restaurants/1/menu HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:31:30] "GET /static/styles.css HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:31:30] "GET /static/img3.jpg HTTP/1.1" 404 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:31:47] "GET /restaurants/1/menu HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:31:47] "GET /static/img3.jpg HTTP/1.1" 404 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:31:48] "GET /restaurants/1/menu HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:31:48] "GET /static/styles.css HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:31:49] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:31:49] "GET /static/img3.jpg HTTP/1.1" 404 -
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 769-024-554
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 769-024-554
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:44:31] "GET /restaurants/1/menu HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:44:31] "GET /static/img3.jpg HTTP/1.1" 404 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:44:40] "GET /restaurants/ HTTP/1.1" 404 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:44:44] "GET /restaurants/view HTTP/1.1" 404 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:44:49] "GET /restaurants/1/ HTTP/1.1" 404 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:44:56] "GET /restaurants/1/menu HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:45:00] "GET /restaurants/1/1/edit HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:45:06] "POST /restaurants/1/1/edit HTTP/1.1" 302 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:45:06] "GET /restaurants/1/menu HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:45:10] "GET /restaurants/1/2/edit HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:45:39] "GET /restaurants/1/3/edit HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:45:41] "POST /restaurants/1/3/edit HTTP/1.1" 302 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:45:41] "GET /restaurants/1/menu HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:45:44] "GET /restaurants/1/3/edit HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:45:49] "POST /restaurants/1/3/edit HTTP/1.1" 302 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:45:49] "GET /restaurants/1/menu HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:45:51] "GET /restaurants/1/3/edit HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:46:07] "POST /restaurants/1/3/edit HTTP/1.1" 302 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:46:07] "GET /restaurants/1/menu HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:46:10] "GET /restaurants/1/3/edit HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:46:21] "POST /restaurants/1/3/edit HTTP/1.1" 302 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:46:21] "GET /restaurants/1/menu HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:46:25] "GET /restaurants/1/3/edit HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:46:27] "POST /restaurants/1/3/edit HTTP/1.1" 302 -
+INFO:werkzeug:10.0.2.2 - - [30/Jul/2017 14:46:28] "GET /restaurants/1/menu HTTP/1.1" 200 -
