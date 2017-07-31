@@ -97,7 +97,7 @@ def showMenu(restaurant_id):
 def showRestaurants():
     restaurants = session.query(Restaurant).order_by(asc(Restaurant.name))
     return render_template('restaurants.html', restaurants = restaurants)
-'''
+
 #Create a new restaurant
 @app.route('/restaurant/new/', methods=['GET','POST'])
 def newRestaurant():
@@ -121,7 +121,6 @@ def editRestaurant(restaurant_id):
         return redirect(url_for('showRestaurants'))
   else:
     return render_template('editRestaurant.html', restaurant = editedRestaurant)
-
 #Delete a restaurant
 @app.route('/restaurant/<int:restaurant_id>/delete/', methods = ['GET','POST'])
 def deleteRestaurant(restaurant_id):
@@ -135,7 +134,7 @@ def deleteRestaurant(restaurant_id):
     return render_template('deleteRestaurant.html',restaurant = restaurantToDelete)
 
 
-'''
+
 if __name__ == '__main__':
     app.debug = True    
 
