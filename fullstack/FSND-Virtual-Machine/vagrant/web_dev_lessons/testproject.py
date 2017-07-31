@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Restaurant, MenuItem
@@ -137,7 +137,7 @@ def deleteRestaurant(restaurant_id):
 
 if __name__ == '__main__':
     app.debug = True    
-
+    app.secret_key = 'super_secret_key'
     LOG_FILENAME = 'errors.log'
 
     logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)    

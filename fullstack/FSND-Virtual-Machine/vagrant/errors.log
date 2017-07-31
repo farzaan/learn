@@ -207,3 +207,48 @@ INFO:werkzeug: * Debugger PIN: 769-024-554
 INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 18:42:19] "GET /restaurants/ HTTP/1.1" 200 -
 INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 18:42:19] "GET /static/styles.css HTTP/1.1" 200 -
 INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 18:42:19] "GET /static/top-banner.jpg HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 769-024-554
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:07:57] "GET /restaurants/1/menu HTTP/1.1" 404 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:08:04] "GET /restaurants/ HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:08:10] "GET /restaurant/1/menu/ HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:08:22] "GET /restaurants/1/2/edit HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:08:58] "POST /restaurants/1/2/edit HTTP/1.1" 500 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:08:58] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:08:59] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:08:59] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:08:59] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:08:59] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:08:59] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/vagrant/web_dev_lessons/testproject.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 769-024-554
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:09:35] "POST /restaurants/1/2/edit HTTP/1.1" 500 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:09:35] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:09:35] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:09:35] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:09:36] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:09:36] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:09:36] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:09:46] "POST /restaurants/1/2/edit HTTP/1.1" 500 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:09:46] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:09:46] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:09:46] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:09:47] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:09:47] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:11:25] "POST /restaurants/1/2/edit HTTP/1.1" 500 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:11:25] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:11:25] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:11:25] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:11:25] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:11:25] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:11:25] "GET /restaurants/1/2/edit?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/vagrant/web_dev_lessons/testproject.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 769-024-554
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:12:52] "POST /restaurants/1/2/edit HTTP/1.1" 302 -
+INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:12:52] "GET /restaurant/1/menu/ HTTP/1.1" 200 -
