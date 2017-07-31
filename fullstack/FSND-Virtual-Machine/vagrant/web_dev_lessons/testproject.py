@@ -54,11 +54,11 @@ def newMenuItem(restaurant_id):
                            'description'], price=request.form['price'], course=request.form['course'], restaurant_id=restaurant_id)
         session.add(newItem)
         session.commit()
-        return redirect(url_for('restaurantMenu', restaurant_id=restaurant_id))
+        flash('New menu item %s' (newItem.name))
+        return redirect(url_for('showMenu', restaurant_id=restaurant_id))
     else:
         return render_template('newmenuitem.html', restaurant_id=restaurant_id)
-
-
+ 
 @app.route('/restaurants/<int:restaurant_id>/<int:menu_id>/edit',
            methods=['GET', 'POST'])
 def editMenuItem(restaurant_id, menu_id):
@@ -141,6 +141,8 @@ def deleteRestaurant(restaurant_id):
     return redirect(url_for('showRestaurants', restaurant_id = restaurant_id))
   else:
     return render_template('deleteRestaurant.html',restaurant = restaurantToDelete)
+
+
 '''
 if __name__ == '__main__':
     app.debug = True    
