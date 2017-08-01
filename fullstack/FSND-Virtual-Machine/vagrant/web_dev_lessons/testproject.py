@@ -3,6 +3,10 @@ from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Restaurant, MenuItem
 
+#LOGIN IMPORTS
+from flask import session as login_session
+import random, string
+
 import logging
 LOG_FILENAME = 'errors.log'
 logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)    
@@ -132,6 +136,12 @@ def deleteRestaurant(restaurant_id):
     return redirect(url_for('showRestaurants', restaurant_id = restaurant_id))
   else:
     return render_template('deleteRestaurant.html',restaurant = restaurantToDelete)
+#Login page
+@app.route('/login/')
+def showLogin():
+        state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
+        login_session['state'] = state
+        return "The Current state is %s" %login_session['state']
 
 
 
@@ -141,11 +151,10 @@ if __name__ == '__main__':
     LOG_FILENAME = 'errors.log'
 
     logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)    
-    #formatter = logging.Formatter("[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
-    #handler = RotatingFileHandler(LOG_FILENAME, maxBytes=10000000, backupCount=5)
-    #handler.setLevel(logging.DEBUG)
-    #handler.setFormatter(formatter)
-    #app.logger.addHandler(handler)    
+    '''
+    clientid: 168375451406-pmikr862nn05e4254vbbs4rhrqa1neft.apps.googleusercontent.com
+    clientsecretion: Tbx2_r-RgGrF_0wzQJQLGHNc
+    '''    
 
 
     app.run(host='0.0.0.0', port=5000)
