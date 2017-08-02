@@ -7,12 +7,23 @@ from database_setup import Base, Restaurant, MenuItem
 from flask import session as login_session
 import random, string
 
+from oauth2client.client import flow_from_clientsecrets
+from oauth2client.client import FlowExchangeError
+import httplib2
+import json
+from flask import make_response
+import requests
+
 import logging
 LOG_FILENAME = 'errors.log'
 logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)    
 #from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__)
+
+CLIENT_ID = json.loads(
+    open('client_secrets.json', 'r').read())['web']['client_id']
+APPLICATION_NAME = "Restaurant Menu"
 
 engine = create_engine('sqlite:///restaurantmenu.db')
 Base.metadata.bind = engine
@@ -141,7 +152,7 @@ def deleteRestaurant(restaurant_id):
 def showLogin():
         state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
         login_session['state'] = state
-        return "The Current state is %s" %login_session['state']
+        return render_template('login.html')
 
 
 

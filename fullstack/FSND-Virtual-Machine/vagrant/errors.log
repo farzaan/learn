@@ -252,3 +252,19 @@ WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 769-024-554
 INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:12:52] "POST /restaurants/1/2/edit HTTP/1.1" 302 -
 INFO:werkzeug:10.0.2.2 - - [31/Jul/2017 19:12:52] "GET /restaurant/1/menu/ HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 769-024-554
+INFO:werkzeug:10.0.2.2 - - [02/Aug/2017 16:37:11] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:10.0.2.2 - - [02/Aug/2017 16:37:17] "GET /login HTTP/1.1" 301 -
+INFO:werkzeug:10.0.2.2 - - [02/Aug/2017 16:37:17] "GET /login/ HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [02/Aug/2017 16:37:21] "GET /login/ HTTP/1.1" 200 -
+INFO:werkzeug:10.0.2.2 - - [02/Aug/2017 16:37:22] "GET /login/ HTTP/1.1" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 769-024-554
+INFO:werkzeug:10.0.2.2 - - [02/Aug/2017 16:38:18] "GET / HTTP/1.1" 404 -
+INFO:werkzeug:10.0.2.2 - - [02/Aug/2017 16:38:28] "GET /lo HTTP/1.1" 404 -
+INFO:werkzeug:10.0.2.2 - - [02/Aug/2017 16:38:34] "GET /login/ HTTP/1.1" 200 -
