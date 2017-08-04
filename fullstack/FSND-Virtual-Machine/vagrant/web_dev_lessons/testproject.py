@@ -13,13 +13,20 @@ import httplib2
 import json
 from flask import make_response
 import requests
-
-
+import os
+import sys
+import logging
+#logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
 
 app = Flask(__name__)
 
-CLIENT_ID = json.loads(
-    open(r'client_secrets.json', 'r').read())['web']['client_id']
+
+#print(os.path.dirname(os.path.abspath(__file__)))
+
+
+newpath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'client_secrets.json')
+
+CLIENT_ID = json.loads(open(newpath, 'r').read())['web']['client_id']
 APPLICATION_NAME = "Restaurant Menu"
 
 engine = create_engine('sqlite:///restaurantmenu.db')
@@ -39,7 +46,7 @@ def gconnect():
 
     try:
         # Upgrade the authorization code into a credentials object
-        oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
+        oauth_flow = flow_from_clientsecrets(newpath, scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
@@ -166,7 +173,7 @@ def newMenuItem(restaurant_id):
                            'description'], price=request.form['price'], course=request.form['course'], restaurant_id=restaurant_id)
         session.add(newItem)
         session.commit()
-        flash('New menu item %s' (newItem.name))
+        flash('New menu item')
         return redirect(url_for('showMenu', restaurant_id=restaurant_id))
     else:
         return render_template('newmenuitem.html', restaurant_id=restaurant_id)
@@ -220,9 +227,9 @@ def showMenu(restaurant_id):
     restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
     items = session.query(MenuItem).filter_by(restaurant_id = restaurant_id).all()
     return render_template('menu.html', items = items, restaurant = restaurant)
-
-@app.route("/restaurants/")
-def showRestaurants():
+@app.route("/")
+@app.route("/restaurant/")
+def showRestaurants():  
     restaurants = session.query(Restaurant).order_by(asc(Restaurant.name))
     return render_template('restaurants.html', restaurants = restaurants)
 
@@ -237,14 +244,14 @@ def newRestaurant():
         flash('New Restaurant %s Successfully Created' % newRestaurant.name)
         session.commit()
         return redirect(url_for('showRestaurants'))
-      else:
+    else:
         return render_template('newRestaurant.html')
 
 #Edit a restaurant
 @app.route('/restaurant/<int:restaurant_id>/edit/', methods = ['GET', 'POST'])
 def editRestaurant(restaurant_id):
-    if 'username' not in login_session:
-        return redirect('/login')
+  if 'username' not in login_session:
+      return redirect('/login')
   editedRestaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
   if request.method == 'POST':
       if request.form['name']:
@@ -271,12 +278,15 @@ def deleteRestaurant(restaurant_id):
 def showLogin():
         state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
         login_session['state'] = state
-        return render_template('login.html')
+        return render_template('login.html', STATE=state)
 
 
 
 if __name__ == '__main__':
-    app.debug = True    
+    app.debug = True  
+    #LOG_FILENAME = 'errors.log'
+  
+    #logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)  
     app.secret_key = 'super_secret_key'
             
     '''
