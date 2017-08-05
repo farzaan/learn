@@ -119,6 +119,7 @@ a {
 
 .row {
   border: 0 solid blue;
+  margin: 2px;
 }
 .col-md-14 {
   border: 0 solid black;
@@ -135,4 +136,15 @@ a {
 
 .col-md-15 {
   border: 0 solid blue;
+}
+
+.list-header{
+  color: #142443;
+  font-weight: bold;
+  font-size: 16px;  
+}
+.item-list {
+  color: #E49D7A;
+  font-weight: bold;
+  font-size: 15px;  
 }

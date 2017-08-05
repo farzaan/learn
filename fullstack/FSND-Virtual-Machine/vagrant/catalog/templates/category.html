@@ -7,45 +7,34 @@
 	<body>
 
 
-	<div class = 'header'><h1>Catalog App - Category.html (to remove)</h1></div>
+	<div class = 'title-super'><h1>Catalog App - Category.html (to remove)</h1></div>
 
+	<div class="container">
+		{% include "catalog_menu.html" %}
 	
-	{% for category in categories %}
-		<a href = "{{url_for('showCategory', cat_name=category.name)}}">
-			<div class="row">
-				<div class="col-md-1"></div>
-					<div class="col-md-10 restaurant-list">
-						<h3>{{category.name}}</h3>
-					</div>
-				<div class="col-md-1"></div>
-			</div>
-		</a>
 
-	{%endfor%}	
+		{% if items.count() > 0 %}
+		
+			{% for i in items %}
+		    
+				<div class = 'nameAndPrice'>
+					
+					<a href = "{{url_for('showItem', category_name=category.name, item_name=i.name)}}">
+						<span class = 'name'><p>{{i.name}}------</p></span>
+					</a>a>
 
-
-	{% if items.count() > 0 %}
-	
-		{% for i in items %}
-	    
-			<div class = 'nameAndPrice'>
+					<span class = 'price'><p>0.0</p></span>
+				</div>
 				
-				<a href = "{{url_for('showItem', category_name=category.name, item_name=i.name)}}">
-					<span class = 'name'><p>{{i.name}}------</p></span>
-				</a>a>
-
-				<span class = 'price'><p>0.0</p></span>
-			</div>
-			
-			
-			<div class = 'description'>
-				<p>{{i.description}}</p>
-			</div>
+				
+				<div class = 'description'>
+					<p>{{i.description}}</p>
+				</div>
 
 
-		{% endfor %}
+			{% endfor %}
 
- 	{% else %}
+	 	{% else %}
 
 			<div class = 'nameAndPrice'>
 				<span class = 'name'><p>No items found!!!</p></span>
@@ -55,9 +44,9 @@
 
 
 
- 	{% endif %}
+	 	{% endif %}
 
-
+	 </div>
 	</body>
 
 

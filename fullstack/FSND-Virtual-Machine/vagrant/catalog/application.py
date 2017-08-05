@@ -38,8 +38,8 @@ session = DBSession()
 @app.route("/")
 @app.route("/catalog/")
 def showCatalog():  
-    category = session.query(Category).order_by(asc(Category.name))
-    return render_template('catalog.html', category=category)
+    categories = session.query(Category).order_by(asc(Category.name))
+    return render_template('catalog.html', categories=categories)
 
 @app.route("/catalog/<string:cat_name>/items")
 def showCategory(cat_name):
