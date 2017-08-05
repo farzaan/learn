@@ -14,5 +14,12 @@ insert into item (name, description, category_id) values('Skate', 'Ball for play
 insert into item (name, description, category_id) values('Skating bat', 'BAt for playing base skating', 5);
 insert into item (name, description, category_id) values('Skating Glove', 'Gloeve for playing Skating', 5);
 
+insert into category (name) values('Frisbee');
+
+insert into category (name) values('Snowboarding');
+
+insert into category (name) values('Rock Claimbing');
+
+insert into category (name) values('Foosball');
 
 select * from item;

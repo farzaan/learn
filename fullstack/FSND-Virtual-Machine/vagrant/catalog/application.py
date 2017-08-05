@@ -34,3 +34,26 @@ Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
+
+@app.route("/")
+@app.route("/catalog/")
+def showCatalog():  
+    category = session.query(Category).order_by(asc(Category.name))
+    return render_template('catalog.html', category=category)
+
+
+
+if __name__ == '__main__':
+    app.debug = True  
+    #LOG_FILENAME = 'errors.log'
+  
+    #logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)  
+    app.secret_key = 'super_secret_key'
+            
+    '''
+    clientid: 168375451406-pmikr862nn05e4254vbbs4rhrqa1neft.apps.googleusercontent.com
+    clientsecretion: Tbx2_r-RgGrF_0wzQJQLGHNc
+    '''    
+
+
+    app.run(host='0.0.0.0', port=8000)
