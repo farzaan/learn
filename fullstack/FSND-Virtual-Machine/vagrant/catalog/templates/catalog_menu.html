@@ -1,14 +1,15 @@
 
-<div class='list-header'>Categories</div>
-{% for category in categories %}
-	<a href = "{{url_for('showCategory', cat_name=category.name)}}">
-		<div class="row">
-			<div class="col-md-1"></div>
-				<div class="col-md-10 item-list">
+<div class="col-md-2 padding-top border-right">
+	<div class='list-header'>Categories</div>
+	{% for category in categories %}
+		<a href = "{{url_for('showCategory', cat_name=category.name)}}">
+			<div class="row">
+				<div class="col-md-15 item-list">
 					{{category.name}}
 				</div>
-			<div class="col-md-1"></div>
-		</div>
-	</a>
+			</div>
+		</a>
 
-{%endfor%}	
+	{%endfor%}	
+
+</div>

@@ -122,11 +122,11 @@ a {
   margin: 2px;
 }
 .col-md-14 {
-  border: 0 solid black;
+  border: 1 solid black;
 }
 
 .col-md-2 {
-  border: 0 solid black;
+  border: 1 solid black;
 }
 
 .col-md-13 {
@@ -135,7 +135,7 @@ a {
 }
 
 .col-md-15 {
-  border: 0 solid blue;
+  border: 1 solid blue;
 }
 
 .list-header{
@@ -147,4 +147,9 @@ a {
   color: #E49D7A;
   font-weight: bold;
   font-size: 15px;  
+}
+
+
+.border-right {
+    border-right: 1px solid #DCDCDC;
 }
