@@ -41,6 +41,19 @@ def showCatalog():
     category = session.query(Category).order_by(asc(Category.name))
     return render_template('catalog.html', category=category)
 
+@app.route("/catalog/<int:category_id>")
+def showItem(category_id):
+    category = session.query(Category).filter_by(id=category_id).one()
+    items = session.query(Item).filter_by(category_id=category_id)
+    output = ""
+    output += "<html><body>"
+    for item in items:
+        output += item.name
+        output += "</br></br></br>"
+
+    output += "</body></html>"
+    
+    return output
 
 
 if __name__ == '__main__':
