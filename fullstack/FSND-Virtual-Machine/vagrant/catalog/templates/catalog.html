@@ -5,9 +5,10 @@
 
 	
 	<body>
+	<div class = 'description'><p>Catalog.html (to remove)</p></div>
 	
 	{% for category in category %}
-		<a href = "{{url_for('showItem', category_id = category.id)}}">
+		<a href = "{{url_for('showCategory', cat_name=category.name)}}">
 			<div class="row">
 				<div class="col-md-1"></div>
 					<div class="col-md-10 restaurant-list">

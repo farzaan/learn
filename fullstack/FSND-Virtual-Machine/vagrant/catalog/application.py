@@ -41,12 +41,27 @@ def showCatalog():
     category = session.query(Category).order_by(asc(Category.name))
     return render_template('catalog.html', category=category)
 
-@app.route("/catalog/<int:category_id>")
-def showItem(category_id):
-    category = session.query(Category).filter_by(id=category_id).one()
-    items = session.query(Item).filter_by(category_id=category_id)
-    return render_template('items.html', items=items)
+@app.route("/catalog/<string:cat_name>/items")
+def showCategory(cat_name):
+    categories = session.query(Category).order_by(asc(Category.name))
+    category = session.query(Category).filter_by(name=cat_name).one()
+    items = session.query(Item).filter_by(category_id=category.id)
 
+    return render_template('category.html', categories=categories, category=category, items=items)
+
+
+
+@app.route("/catalog/<string:category_name>/<string:item_name>")
+def showItem(category_name, item_name):
+    category = session.query(Category).filter_by(name=category_name).one()
+    item = session.query(Item).filter_by(name=item_name).one()
+    #items = session.query(Item).filter_by(category_id=category.id)
+
+    return render_template('item.html', category=category, item=item)
+
+
+#@app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_id>/edit',methods=['GET', 'POST'])
+#def editItem()
 
 if __name__ == '__main__':
     app.debug = True  

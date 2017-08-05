@@ -1,0 +1,66 @@
+<html>
+<head>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+
+	
+	<body>
+
+
+	<div class = 'description'><p>Category.html (to remove)</p></div>
+
+	
+	{% for category in categories %}
+		<a href = "{{url_for('showCategory', cat_name=category.name)}}">
+			<div class="row">
+				<div class="col-md-1"></div>
+					<div class="col-md-10 restaurant-list">
+						<h3>{{category.name}}</h3>
+					</div>
+				<div class="col-md-1"></div>
+			</div>
+		</a>
+
+	{%endfor%}	
+
+
+	{% if items.count() > 0 %}
+	
+		{% for i in items %}
+	    
+			<div class = 'nameAndPrice'>
+				
+				<a href = "{{url_for('showItem', category_name=category.name, item_name=i.name)}}">
+					<span class = 'name'><p>{{i.name}}------</p></span>
+				</a>a>
+
+				<span class = 'price'><p>0.0</p></span>
+			</div>
+			
+			
+			<div class = 'description'>
+				<p>{{i.description}}</p>
+			</div>
+
+
+		{% endfor %}
+
+ 	{% else %}
+
+			<div class = 'nameAndPrice'>
+				<span class = 'name'><p>No items found!!!</p></span>
+				<p> </p>
+			</span>
+			</div>
+
+
+
+ 	{% endif %}
+
+
+	</body>
+
+
+
+
+</html>
