@@ -5,8 +5,20 @@
 
 	
 	<body>
-	<div class = 'description'><p>Catalog.html (to remove)</p></div>
-	
+	<div class = 'header'><h1>Catalog App - Catalog.html (to remove)</h1></div>
+
+<div class="row top-menu">
+	<div class="col-md-6">
+
+			<span class="glyphicon glyphicon-home" aria-hidden="true"></span>Show All Restaurants
+		</a>
+	</div>
+	<div class="col-md-6 text-right">
+					<p>lll</p>
+		
+	</div>
+</div>	
+
 	{% for category in category %}
 		<a href = "{{url_for('showCategory', cat_name=category.name)}}">
 			<div class="row">

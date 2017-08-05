@@ -1,4 +1,4 @@
-body            { font-family: sans-serif; background-image: url('img3.jpg'); background-color: #333333}
+body            { font-family: sans-serif; background-image: url('img3.jpg'); background-color: #fcfdff}
 h1, h2, h3, h4       { color: #FFFFFF; }
 h1, h2          { font-family: 'Georgia', serif; margin: 0; }
 h1              { border-bottom: 2px solid #eee; }
@@ -15,3 +15,132 @@ a {text-decoration: none; color:#FFFFCC; font-size: .75em;}
 .description {}
 .price {text-align: right; width:50%; float: right; }
 .editdeletepane{}
+
+.flash          { background: #cee5F5; }
+
+/* CSS Document */
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  color: #747704;
+  background-color:#5e6166
+}
+
+h2 {
+  color: #BCBBBB;
+  font-weight: bold;   
+}
+
+h3 {
+  text-transform: uppercase;
+  color: #333A40;
+  font-weight: bold;
+}
+
+h4 {
+  color: #5E6265;
+  font-weight: bold;
+}
+
+p {
+  color: #717578;
+  font-weight: bold;
+}
+
+a {
+  color: #717578;
+  font-weight: bold;
+}
+
+.text-muted {
+  color: #8795A0;
+}
+
+.text-thin {
+  font-weight: 200;
+}
+
+.title-super {
+  color: #333A40;
+  font-size: 60px;
+}
+
+.title-logo {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  max-width: 200px;
+  height: 100px;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  background-color:white;
+  margin: 70px auto;
+}
+
+.heading {
+  border-bottom: 3px solid #bcbbbb;
+  margin-bottom: 30px;
+}
+
+.img-responsive {
+  margin: 0 auto;
+}
+
+.img-row-3 {
+  height: 50%;
+  max-width: 300px;
+  height: 180px;
+}
+
+.colortext {
+  margin: auto;
+  text-align:center;
+}
+
+.color {
+  margin: auto;
+  max-width: 70px;
+  height: 70px;
+}
+
+.two { 
+  background-color: #2d3c49;
+}
+
+.three {
+  background-color:#7d97ad;
+}
+
+.one {
+  background-color: #02b3e4
+}
+
+.row {
+  border: 0 solid blue;
+}
+.col-md-14 {
+  border: 0 solid black;
+}
+
+.col-md-2 {
+  border: 0 solid black;
+}
+
+.col-md-13 {
+  max-width: 350px;
+  height: 150px;
+}
+
+.col-md-15 {
+  border: 0 solid blue;
+}
