@@ -47,7 +47,7 @@ a {
 .body {
   font-family: "Lato", sans-serif;
   font-weight: 300;
-  color: #FFFFFF;
+  color: #132342;
   background-color:#FFFFFF
 }
 
@@ -152,4 +152,8 @@ a {
 
 .border-right {
     border-right: 1px solid #DCDCDC;
+}
+
+.select_text {
+  color: black;
 }

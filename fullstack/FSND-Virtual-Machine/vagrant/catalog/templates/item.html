@@ -9,8 +9,8 @@
 	
     
 	
-	<div class = 'nameAndPrice'>
-		<span class = 'name'><p>{{item.name}}------</p></span>
+	<div class = 'list-header'>
+		<span class = 'name'><p>{{item.name}}</p></span>
 
 		<span class = 'price'>
 
@@ -26,8 +26,8 @@
 
 <div class = "editdeletepane">
 
-	<a href='{{category.name, category.id, item.name, item.id}}'  >Edit</a>
-	<a href='{{category.name, category.id, item.name, item.id}}' >Delete</a>
+	<a href="{{url_for('editItem', category_name=category.name, item_name=item.name)}}"  >Edit</a>
+	<a href="{{url_for('deleteItem', category_name=category.name, item_name=item.name)}}" >Delete</a>
 
 	
 </div>
