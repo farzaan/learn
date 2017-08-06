@@ -11,15 +11,14 @@
 
 		{% include "catalog_menu.html" %}
 
-		Add item goes here
+		<p><a href="{{url_for('newItem')}}">Add Item</a></p>
 
 		<p>Latest items</p>
 		{%for i in items%}
-			{%category = session.query(Category).filter_by(id=i.category.id).one()%}
 			
 			<div class="row">
 				<div class="col-md-15 item-list">
-					{{i.name}}({{category.name}})
+					{{i.name}}({{i.category_id}})
 				</div>
 			</div>
 		</a>

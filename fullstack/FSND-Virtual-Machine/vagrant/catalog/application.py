@@ -86,6 +86,19 @@ def deleteItem(category_name, item_name):
     else:
         return render_template('deleteItem.html', item=item, category=category)      
 
+@app.route("/catalog/new", methods=['GET', 'POST'])
+def newItem():
+    categories = session.query(Category).order_by(asc(Category.name))
+    if request.method == 'POST':
+        requestName = request.form['category_name'];
+        resqestId = session.query(Category).filter_by(name=requestName)
+        newItem = Item(name=request.form['name'], description=request.form['description'], category_id = requestId.name)
+
+        session.add(newItem)
+        session.commit()
+        return redirect(url_for('showCatalog'))
+    else:
+        return  render_template('newItem.html', categories=categories)
 #@app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_id>/edit',methods=['GET', 'POST'])
 #def editItem()
 
