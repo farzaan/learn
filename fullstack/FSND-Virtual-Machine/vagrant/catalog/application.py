@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
-from sqlalchemy import create_engine, asc
+from sqlalchemy import create_engine, asc, desc
 from sqlalchemy.orm import sessionmaker
 from database import Base, Category, Item
 
@@ -39,7 +39,7 @@ session = DBSession()
 @app.route("/catalog/")
 def showCatalog():  
     categories = session.query(Category).order_by(asc(Category.name))
-    items = session.query(Item).order_by(asc(Item.id)).limit(10)
+    items = session.query(Item).order_by(desc(Item.id)).limit(10)
     return render_template('catalog.html', categories=categories, items=items)
 
 @app.route("/catalog/<string:cat_name>/items")
@@ -70,7 +70,7 @@ def editItem(category_name, item_name):
             item.name = request.form['name']
         if request.form['description']:
             item.description = request.form['description']
-        if request.form:
+        if request.form['category']:
             item.category_name = request.form['category']
         return redirect(url_for('showItem', category_name=category_name, item_name=item_name))
     else:
@@ -78,11 +78,13 @@ def editItem(category_name, item_name):
 @app.route("/catalog/<string:category_name>/<string:item_name>/delete", methods=['GET', 'POST'])
 def deleteItem(category_name, item_name):
     category = session.query(Category).filter_by(name=category_name).one()
+
     item = session.query(Item).filter_by(name=item_name).one()
+
     if request.method == 'POST':
         session.delete(item)
         session.commit()
-        return redirect(url_for('showItem', category_name=category_name, item_name=item_name))
+        return redirect(url_for('showCategory', cat_name=category_name))
     else:
         return render_template('deleteItem.html', item=item, category=category)      
 
@@ -91,8 +93,10 @@ def newItem():
     categories = session.query(Category).order_by(asc(Category.name))
     if request.method == 'POST':
         requestName = request.form['category_name'];
-        resqestId = session.query(Category).filter_by(name=requestName)
-        newItem = Item(name=request.form['name'], description=request.form['description'], category_id = requestId.name)
+        print(requestName)
+        requestId = session.query(Category).filter_by(name=requestName).one()
+        print(requestId.id)
+        newItem = Item(name=request.form['name'], description=request.form['description'], category_id = requestId.id)
 
         session.add(newItem)
         session.commit()
