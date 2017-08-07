@@ -23,12 +23,12 @@ app = Flask(__name__)
 
 #print(os.path.dirname(os.path.abspath(__file__)))
 
-'''
+
 newpath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'client_secrets.json')
 
 CLIENT_ID = json.loads(open(newpath, 'r').read())['web']['client_id']
-APPLICATION_NAME = "Restaurant Menu"
-'''
+APPLICATION_NAME = "Catalog app"
+
 engine = create_engine('sqlite:///catalog.db')
 Base.metadata.bind = engine
 
