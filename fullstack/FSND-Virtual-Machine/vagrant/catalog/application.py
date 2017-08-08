@@ -66,8 +66,11 @@ def showItem(category_name, item_name):
     category = session.query(Category).filter_by(name=category_name).one()
     item = session.query(Item).filter_by(name=item_name).one()
     #items = session.query(Item).filter_by(category_id=category.id)
-
-    return render_template('item.html', category=category, item=item)
+    if 'username' in login_session:
+        return render_template('item.html', category=category, item=item, username=login_session['username'])
+    else:
+        return render_template('item.html', category=category, item=item, username=None)
+    
 
 @app.route("/catalog/<string:category_name>/<string:item_name>/edit", methods=['GET', 'POST'])
 def editItem(category_name, item_name):
