@@ -38,9 +38,18 @@ session = DBSession()
 @app.route("/")
 @app.route("/catalog/")
 def showCatalog():  
+    print("Inside showCatalog")
     categories = session.query(Category).order_by(asc(Category.name))
     items = session.query(Item).order_by(desc(Item.id)).limit(10)
-    return render_template('catalog.html', categories=categories, items=items)
+    if 'username' in login_session:
+        return render_template('catalog.html', categories=categories, items=items, username=login_session['username'])
+    else:
+        return render_template('catalog.html', categories=categories, items=items, username=None)
+    #    print('not in login sesssion')
+    #    return render_template('catalogPublic.html', categories=categories, items=items)
+    #else:
+    #print(login_session['username'])
+    #return render_template('catalog.html', categories=categories, items=items, username=login_session['username'])
 
 @app.route("/catalog/<string:cat_name>/items")
 def showCategory(cat_name):
@@ -210,7 +219,8 @@ def gdisconnect():
     print 'In gdisconnect access token is %s', access_token
     print 'User name is: '
     print login_session['username']
-    url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % login_session['access_token']
+    url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % access_token
+    print('URL', url)
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
     print 'result is '
@@ -228,6 +238,15 @@ def gdisconnect():
         response = make_response(json.dumps('Failed to revoke token for given user.', 400))
         response.headers['Content-Type'] = 'application/json'
         return response
+
+@app.route("/catalog.json")
+def catalogJSON():
+    categories = session.query(Category).order_by(asc(Category.name))
+    output = ""
+    for category in categories:
+        items = session.query(Item).filter_by(category_id=category.id)
+        output.append(jsonify(ContentItem = [i.serialize for i in items]))
+    return output
 if __name__ == '__main__':
     app.debug = True  
     #LOG_FILENAME = 'errors.log'
@@ -239,7 +258,7 @@ if __name__ == '__main__':
     <!---->
     <a href = "{{url_for('showItem', category_name=category.name, item_name=i.name)}}">
     clientid: 168375451406-7it9b3k4viqihdt9e8g7ttjvlhfprl8i.apps.googleusercontent.com
-    clientsecretion: IdkRNofNjEIiAw9bYfl_tTkI
+    clientsecretion: o1OtQeytTdDD4WA6UmWY-_YD
     '''    
 
 
