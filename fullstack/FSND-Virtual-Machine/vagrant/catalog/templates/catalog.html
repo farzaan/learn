@@ -22,17 +22,18 @@
 			}
 		{% endif %}
 
-
-		<p>Latest items</p>
-		{%for i in items%}
-			
-			<div class="row">
-				<div class="col-md-15 item-list">
-					{{i.name}}({{i.id}})
+		<div class="col-md-6 col-md-offset-0 padding-top">
+			<p>Latest items</p>
+			{%for i in items%}
+				
+				<div>
+					<div class="col-md-15 item-list">
+						{{i.name}}({{i.id}})
+					</div>
 				</div>
-			</div>
-		</a>
-		{%endfor%}
+			</a>
+			{%endfor%}
+		</div>
 	</div>
 	
 	</body>
