@@ -6,13 +6,18 @@
 			</a>
 			
 				{% if username %}
+				<ul class="nav nav-pills">
 					<div class="text-right">
 						<a href="{{url_for('gdisconnect')}}">Logout</a>		
 					</div>
+				</ul>
+
 				{% else %}
+				<ul class="nav nav-pills">
 					<div class="text-right">
 						<a href="{{url_for('showLogin')}}">Login</a> 		
 					</div>
+				</ul>
 				{% endif %}
 			
 		</p>

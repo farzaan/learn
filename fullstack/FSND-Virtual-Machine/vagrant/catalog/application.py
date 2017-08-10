@@ -248,7 +248,7 @@ def catalogJSON():
     output = ""
     for category in categories:
         items = session.query(Item).filter_by(category_id=category.id)
-        output.append(jsonify(ContentItem = [i.serialize for i in items]))
+        output += jsonify(ContentItem = [i.serialize for i in items])
     return output
 if __name__ == '__main__':
     app.debug = True  

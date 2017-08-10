@@ -15,6 +15,7 @@
 		<div class="row top-menu">	
 			{% include "catalog_menu.html" %}
 			<div class="col-md-6 col-md-offset-0 padding-top">
+				<div class='list-header'>{{category.name}} Items({{items.count}} items)</div>
 				{% if items.count() > 0 %}
 				
 					{% for i in items %}
@@ -26,11 +27,6 @@
 							</a>
 						</div>
 						
-						
-						<div class = 'description'>
-							<p>{{i.description}}</p>
-						</div>
-
 
 					{% endfor %}
 

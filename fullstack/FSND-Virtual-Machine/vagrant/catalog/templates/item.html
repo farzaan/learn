@@ -1,38 +1,41 @@
 <html>
 <head>
+	
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
 	</head>
 
 	
 	<body>
-	<div class = 'description'><p>Item.html (to remove)</p></div>
 	
+	{% include "header.html" %}
     
-	
-	<div class = 'list-header'>
-		<span class = 'name'><p>{{item.name}}</p></span>
+	<div class="container">
+		<div class = 'list-header'>
+			<span class = 'name'><p>{{item.name}}</p></span>
 
-		<span class = 'price'>
+			<span class = 'price'>
 
 
-		<p> </p>
-	</span>
-	</div>
-	
-	
-	<div class = 'description'>
-		<p>{{item.description}}</p>
-	</div>
-	{% if username %}
-		<div class = "editdeletepane">
-
-			<a href="{{url_for('editItem', category_name=category.name, item_name=item.name)}}"  >Edit</a>
-			<a href="{{url_for('deleteItem', category_name=category.name, item_name=item.name)}}" >Delete</a>
-
-			
+			<p> </p>
+		</span>
 		</div>
-	{% endif %}
+		
+		
+		<div class = 'description'>
+			<p>{{item.description}}</p>
+		</div>
+		{% if username %}
+			<div class = "editdeletepane">
 
+				<a href="{{url_for('editItem', category_name=category.name, item_name=item.name)}}"  >Edit</a>
+				<a href="{{url_for('deleteItem', category_name=category.name, item_name=item.name)}}" >Delete</a>
+
+				
+			</div>
+		{% endif %}
+	</div>
 	</body>
 
 
