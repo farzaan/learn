@@ -15,17 +15,18 @@
 		<div class="row top-menu">	
 			{% include "catalog_menu.html" %}
 			<div class="col-md-6 col-md-offset-0 padding-top">
-				<div class='list-header'>{{category.name}} Items({{items.count}} items)</div>
+				<div class='list-header'>{{category.name}} Items({{item_count}} items)</div>
 				{% if items.count() > 0 %}
 				
 					{% for i in items %}
 				    
-						<div class = 'nameAndPrice'>
-							
-							<a href = "{{url_for('showItem', category_name=category.name, item_name=i.name)}}">
-								<span class = 'name'><p>{{i.name}}</p></span>
-							</a>
-						</div>
+						<a href = "{{url_for('showItem', category_name=category.name, item_name=i.name)}}">
+							<div class="row">
+								<div class="col-md-15 item-list">
+									{{i.name}}
+								</div>
+							</div>
+						</a>
 						
 
 					{% endfor %}

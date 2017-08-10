@@ -56,8 +56,9 @@ def showCategory(cat_name):
     categories = session.query(Category).order_by(asc(Category.name))
     category = session.query(Category).filter_by(name=cat_name).one()
     items = session.query(Item).filter_by(category_id=category.id)
-
-    return render_template('category.html', categories=categories, category=category, items=items)
+    item_count = items.count()
+    print(item_count)
+    return render_template('category.html', categories=categories, category=category, items=items, item_count=item_count)
 
 
 
@@ -236,7 +237,7 @@ def gdisconnect():
         del login_session['picture']
         response = make_response(json.dumps('Successfully disconnected.'), 200)
         response.headers['Content-Type'] = 'application/json'
-        return response
+        return redirect(url_for('showCatalog'))
     else:
         response = make_response(json.dumps('Failed to revoke token for given user.', 400))
         response.headers['Content-Type'] = 'application/json'
@@ -261,7 +262,7 @@ if __name__ == '__main__':
     <!---->
     <a href = "{{url_for('showItem', category_name=category.name, item_name=i.name)}}">
     clientid: 168375451406-7it9b3k4viqihdt9e8g7ttjvlhfprl8i.apps.googleusercontent.com
-    clientsecretion: o1OtQeytTdDD4WA6UmWY-_YD
+    clientsecretion: bV5cGrBOuYoE1DV8zpxTmANB
     '''    
 
 

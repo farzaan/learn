@@ -17,14 +17,14 @@
 
 		{% include "catalog_menu.html" %}
 
-		{%  if username %}
-			{{username}}
-			<p><a href="{{url_for('newItem')}}">Add Item</a></p>
-			}
-		{% endif %}
+		
 
 		<div class="col-md-6 col-md-offset-0 padding-top">
+			{%  if username %}
+			<a href="{{url_for('newItem')}}">Add Item</a>
 			<p>Latest items</p>
+			
+			{% endif %}
 			{%for i in items%}
 				
 					<div class="col-md-15 item-list">
