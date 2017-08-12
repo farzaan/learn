@@ -1,11 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
+from flask import Flask, render_template, request
+from flask import redirect, url_for, jsonify, flash
 from sqlalchemy import create_engine, asc, desc
 from sqlalchemy.orm import sessionmaker
 from database import Base, Category, Item
 
-#LOGIN IMPORTS
+# LOGIN IMPORTS
 from flask import session as login_session
-import random, string
+import random
+import string
 
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
@@ -16,15 +18,17 @@ import requests
 import os
 import sys
 import logging
-#logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
+# logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
 
 app = Flask(__name__)
 
 
-#print(os.path.dirname(os.path.abspath(__file__)))
+# print(os.path.dirname(os.path.abspath(__file__)))
 
 
-newpath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'client_secrets.json')
+newpath = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        'client_secrets.json')
 
 CLIENT_ID = json.loads(open(newpath, 'r').read())['web']['client_id']
 APPLICATION_NAME = "Catalog app"
@@ -35,21 +39,28 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-@app.route("/")     
+
+@app.route("/")
 @app.route("/catalog/")
-def showCatalog():  
+def showCatalog():
     print("Inside showCatalog")
     categories = session.query(Category).order_by(asc(Category.name))
     items = session.query(Item).order_by(desc(Item.id)).limit(10)
     if 'username' in login_session:
-        return render_template('catalog.html', categories=categories, items=items, username=login_session['username'])
+        return render_template(
+            'catalog.html',
+            categories=categories,
+            items=items,
+            username=login_session['username']
+            )
     else:
-        return render_template('catalog.html', categories=categories, items=items, username=None)
-    #    print('not in login sesssion')
-    #    return render_template('catalogPublic.html', categories=categories, items=items)
-    #else:
-    #print(login_session['username'])
-    #return render_template('catalog.html', categories=categories, items=items, username=login_session['username'])
+        return render_template(
+            'catalog.html',
+            categories=categories,
+            items=items,
+            username=None
+            )
+
 
 @app.route("/catalog/<string:cat_name>/items")
 def showCategory(cat_name):
@@ -58,22 +69,38 @@ def showCategory(cat_name):
     items = session.query(Item).filter_by(category_id=category.id)
     item_count = items.count()
     print(item_count)
-    return render_template('category.html', categories=categories, category=category, items=items, item_count=item_count)
-
+    return render_template(
+        'category.html',
+        categories=categories,
+        category=category,
+        items=items,
+        item_count=item_count
+        )
 
 
 @app.route("/catalog/<string:category_name>/<string:item_name>")
 def showItem(category_name, item_name):
     category = session.query(Category).filter_by(name=category_name).one()
     item = session.query(Item).filter_by(name=item_name).one()
-    #items = session.query(Item).filter_by(category_id=category.id)
+    # items = session.query(Item).filter_by(category_id=category.id)
     if 'username' in login_session:
-        return render_template('item.html', category=category, item=item, username=login_session['username'])
+        return render_template(
+            'item.html',
+            category=category,
+            item=item,
+            username=login_session['username']
+            )
     else:
-        return render_template('item.html', category=category, item=item, username=None)
-    
+        return render_template(
+            'item.html',
+            category=category,
+            item=item,
+            username=None)
 
-@app.route("/catalog/<string:category_name>/<string:item_name>/edit", methods=['GET', 'POST'])
+
+@app.route(
+    "/catalog/<string:category_name>/<string:item_name>/edit",
+    methods=['GET', 'POST'])
 def editItem(category_name, item_name):
     if 'username' not in login_session:
         return redirect('/login')
@@ -87,10 +114,19 @@ def editItem(category_name, item_name):
             item.description = request.form['description']
         if request.form['category']:
             item.category_name = request.form['category']
-        return redirect(url_for('showItem', category_name=category_name, item_name=item_name))
+        return redirect(url_for(
+            'showItem',
+            category_name=category_name, item_name=item_name))
     else:
-        return render_template('editItem.html', categories=categories, item=item, category=category) 
-@app.route("/catalog/<string:category_name>/<string:item_name>/delete", methods=['GET', 'POST'])
+        return render_template(
+            'editItem.html',
+            categories=categories,
+            item=item, category=category)
+
+
+@app.route(
+    "/catalog/<string:category_name>/<string:item_name>/delete",
+    methods=['GET', 'POST'])
 def deleteItem(category_name, item_name):
     if 'username' not in login_session:
         return redirect('/login')
@@ -103,7 +139,8 @@ def deleteItem(category_name, item_name):
         session.commit()
         return redirect(url_for('showCategory', cat_name=category_name))
     else:
-        return render_template('deleteItem.html', item=item, category=category)      
+        return render_template('deleteItem.html', item=item, category=category)
+
 
 @app.route("/catalog/new", methods=['GET', 'POST'])
 def newItem():
@@ -112,23 +149,33 @@ def newItem():
         return redirect('/login')
     categories = session.query(Category).order_by(asc(Category.name))
     if request.method == 'POST':
-        requestName = request.form['category_name'];
+        requestName = request.form['category_name']
         print(requestName)
         requestId = session.query(Category).filter_by(name=requestName).one()
         print(requestId.id)
-        newItem = Item(name=request.form['name'], description=request.form['description'], category_id = requestId.id)
+        newItem = Item(
+            name=request.form['name'],
+            description=request.form['description'],
+            category_id=requestId.id)
 
         session.add(newItem)
         session.commit()
         return redirect(url_for('showCatalog'))
     else:
-        return  render_template('newItem.html', categories=categories)
-#@app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_id>/edit',methods=['GET', 'POST'])
+        return render_template('newItem.html', categories=categories)
+
+
 @app.route('/login/')
 def showLogin():
-        state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
+        state = ''.join(
+            random.choice(
+                string.ascii_uppercase + string.digits
+                )
+            for x in xrange(32)
+            )
         login_session['state'] = state
         return render_template('login.html', STATE=state)
+
 
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
@@ -181,8 +228,9 @@ def gconnect():
     stored_access_token = login_session.get('access_token')
     stored_gplus_id = login_session.get('gplus_id')
     if stored_access_token is not None and gplus_id == stored_gplus_id:
-        response = make_response(json.dumps('Current user is already connected.'),
-                                 200)
+        response = make_response(
+            json.dumps('Current user is already connected.'),
+            200)
         response.headers['Content-Type'] = 'application/json'
         return response
 
@@ -207,17 +255,20 @@ def gconnect():
     output += '!</h1>'
     output += '<img src="'
     output += login_session['picture']
-    output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
+    output += ' " style = "width: 300px; height: 300px;border-radius:150px;\
+    -webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
     flash("you are now logged in as %s" % login_session['username'])
     print "done!"
     return output
+
 
 @app.route('/gdisconnect')
 def gdisconnect():
     access_token = login_session.get('access_token')
     if access_token is None:
         print 'Access Token is None'
-        response = make_response(json.dumps('Current user not connected.'), 401)
+        response = make_response(
+            json.dumps('Current user not connected.'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
     print 'In gdisconnect access token is %s', access_token
@@ -239,33 +290,34 @@ def gdisconnect():
         response.headers['Content-Type'] = 'application/json'
         return redirect(url_for('showCatalog'))
     else:
-        response = make_response(json.dumps('Failed to revoke token for given user.', 400))
+        response = make_response(
+            json.dumps('Failed to revoke token for given user.', 400))
         response.headers['Content-Type'] = 'application/json'
         return response
+
 
 @app.route("/catalog.json")
 def catalogJSON():
     categories = session.query(Category).order_by(asc(Category.name))
-    #d= { 'Activity': { 'Subactivity': { 'Subsubactivity': 'value }}}
-    output =  {}
+    # d= { 'Activity': { 'Subactivity': { 'Subsubactivity': 'value }}}
+    output = {}
     categories_json = {}
     for category in categories:
-        cat_json = {}#  { 'Category': { 'id': '', 'name': ''}}
+        cat_json = {}
         cat_json['id'] = str(category.id)
         cat_json['name'] = category.name
         cat_json['Item'] = {}
-        
         items = session.query(Item).filter_by(category_id=category.id).all()
         items_json = {}
         for item in items:
             item_json = {}
             item_json['cat_id'] = category.id
-            item_json['description'] = item.description        
+            item_json['description'] = item.description
             item_json['id'] = item.id
             items_json[str(item.id)] = item_json
 
-        cat_json['Item']  = items_json
-            #output['Activity']['Subactivity']['subsubactivity'] = value
+        cat_json['Item'] = items_json
+        # output['Activity']['Subactivity']['subsubactivity'] = value
         output[str(category.id)] = cat_json
 
     categories_json['Category'] = output
@@ -275,18 +327,11 @@ def catalogJSON():
 
 
 if __name__ == '__main__':
-    app.debug = True  
-    #LOG_FILENAME = 'errors.log'
-  
-    #logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)  
+    app.debug = True
+
     app.secret_key = 'super_secret_key'
-            
+
     '''
-    <!---->
-    <a href = "{{url_for('showItem', category_name=category.name, item_name=i.name)}}">
-    clientid: 168375451406-7it9b3k4viqihdt9e8g7ttjvlhfprl8i.apps.googleusercontent.com
     clientsecretion: bV5cGrBOuYoE1DV8zpxTmANB
-    '''    
-
-
+    '''
     app.run(host='0.0.0.0', port=8000)
