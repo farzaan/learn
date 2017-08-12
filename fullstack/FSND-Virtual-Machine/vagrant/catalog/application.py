@@ -35,7 +35,7 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-@app.route("/")
+@app.route("/")     
 @app.route("/catalog/")
 def showCatalog():  
     print("Inside showCatalog")
@@ -246,11 +246,34 @@ def gdisconnect():
 @app.route("/catalog.json")
 def catalogJSON():
     categories = session.query(Category).order_by(asc(Category.name))
-    output = ""
+    #d= { 'Activity': { 'Subactivity': { 'Subsubactivity': 'value }}}
+    output =  {}
+    categories_json = {}
     for category in categories:
-        items = session.query(Item).filter_by(category_id=category.id)
-        output += jsonify(ContentItem = [i.serialize for i in items])
-    return output
+        cat_json = {}#  { 'Category': { 'id': '', 'name': ''}}
+        cat_json['id'] = str(category.id)
+        cat_json['name'] = category.name
+        cat_json['Item'] = {}
+        
+        items = session.query(Item).filter_by(category_id=category.id).all()
+        items_json = {}
+        for item in items:
+            item_json = {}
+            item_json['cat_id'] = category.id
+            item_json['description'] = item.description        
+            item_json['id'] = item.id
+            items_json[str(item.id)] = item_json
+
+        cat_json['Item']  = items_json
+            #output['Activity']['Subactivity']['subsubactivity'] = value
+        output[str(category.id)] = cat_json
+
+    categories_json['Category'] = output
+
+    print(categories_json)
+    return jsonify(**categories_json)
+
+
 if __name__ == '__main__':
     app.debug = True  
     #LOG_FILENAME = 'errors.log'
