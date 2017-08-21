@@ -23,6 +23,8 @@ sqlite3 catalog.db
 .read insert_vals.sql
 ```
 
+### Start Web Application
+
 + To start the web application run 
 
 ```
