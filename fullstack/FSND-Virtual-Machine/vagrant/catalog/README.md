@@ -11,21 +11,23 @@
 
 ### Populate database
 
-+ 1. Connect to Database:
++ Connect to Database:
 
 ```
 sqlite3 catalog.db
 ```
 
-+ 2. Populate the database:
++ Populate the database:
 
 ```
 .read insert_vals.sql
 ```
 
-+ 3. To start the web application run 
++ To start the web application run 
 
-```python database.py```
+```
+python database.py
+```
 
 ## How to Run
 
