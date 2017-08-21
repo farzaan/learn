@@ -14,18 +14,18 @@
 + Connect to Database:
 
 ```
->> sqlite3 catalog.db
+sqlite3 catalog.db
 ```
 
 + How to populate the database:
 
 ```
->> .read insert_vals.sql
+.read insert_vals.sql
 ```
 
 + To start the web application
 
->>  run ```python database.py```
+run ```python database.py```
 
 ## How to Run
 
