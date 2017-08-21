@@ -8,7 +8,24 @@
 ## Requirements
 
 + Full stack nanodegree virtual machine: Download [FSND](http://github.com/udacity/fullstack-nanodegree-vm "FSND")
-+  run ```python database.py```
+
+### Populate database
+
++ Connect to Database:
+
+```
+>> sqlite3 catalog.db
+```
+
++ How to populate the database:
+
+```
+>> .read insert_vals.sql
+```
+
++ To start the web application
+
+>>  run ```python database.py```
 
 ## How to Run
 
