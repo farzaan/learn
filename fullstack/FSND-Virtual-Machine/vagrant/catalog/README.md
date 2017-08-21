@@ -23,9 +23,9 @@ sqlite3 catalog.db
 .read insert_vals.sql
 ```
 
-+ 3. Start the web application
++ 3. To start the web application run 
 
-run ```python database.py```
+```python database.py```
 
 ## How to Run
 
