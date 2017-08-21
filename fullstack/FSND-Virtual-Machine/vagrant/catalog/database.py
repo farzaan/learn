@@ -26,6 +26,7 @@ class Item(Base):
     id = Column(Integer, primary_key=True)
     description = Column(String(250))
     category_id = Column(Integer, ForeignKey('category.id'))
+    username = Column(String(50))
     category = relationship(Category)
 
     @property
@@ -34,6 +35,7 @@ class Item(Base):
         return {
         'name': self.name,
         'description': self.description,
+        'username': self.username,
         'id': self.id,
         }
 

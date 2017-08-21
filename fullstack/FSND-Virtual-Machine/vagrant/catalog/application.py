@@ -144,8 +144,7 @@ def editItem(category_name, item_name):
     category = session.query(Category).filter_by(name=category_name).one()
     categories = session.query(Category).order_by(asc(Category.name))
     item = session.query(Item).filter_by(name=item_name).one()
-
-    if item.category_id != login_session['username']:
+    if item.username != login_session['username']:
         flash('You cannot edit %s' % item.name)
         return redirect(url_for(
             'showItem',
@@ -189,7 +188,7 @@ def deleteItem(category_name, item_name):
 
     item = session.query(Item).filter_by(name=item_name).one()
 
-    if item.category_id != login_session['username']:
+    if item.username != login_session['username']:
         flash('You cannot delete %s' % item.name)
         return redirect(url_for(
             'showItem',
