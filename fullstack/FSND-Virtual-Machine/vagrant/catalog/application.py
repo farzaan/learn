@@ -42,7 +42,11 @@ session = DBSession()
 
 def login_required(f):
     @wraps(f)
-    def decorated_function 
+    def decorated_function(*args, **kwargs):
+        if 'username' not in login_session:
+            return redirect('/login')
+        return f(*args, **kwargs)
+    return decorated_function
 
 
 @app.route("/")
@@ -102,6 +106,9 @@ def showItem(category_name, item_name):
     category = session.query(Category).filter_by(name=category_name).one()
     item = session.query(Item).filter_by(name=item_name).one()
     # items = session.query(Item).filter_by(category_id=category.id)
+
+    print("Inside showItem", category_name, item_name)
+
     if 'username' in login_session:
         return render_template(
             'item.html',
@@ -120,6 +127,7 @@ def showItem(category_name, item_name):
 @app.route(
     "/catalog/<string:category_name>/<string:item_name>/edit",
     methods=['GET', 'POST'])
+@login_required
 def editItem(category_name, item_name):
     """
     Edit item page.
@@ -131,11 +139,18 @@ def editItem(category_name, item_name):
        A redirect to category when edited.
        A render template for the edit item page.
     """
-    if 'username' not in login_session:
-        return redirect('/login')
+    #if 'username' not in login_session:
+    #    return redirect('/login')
     category = session.query(Category).filter_by(name=category_name).one()
     categories = session.query(Category).order_by(asc(Category.name))
     item = session.query(Item).filter_by(name=item_name).one()
+
+    if item.category_id != login_session['username']:
+        flash('You cannot edit %s' % item.name)
+        return redirect(url_for(
+            'showItem',
+            category_name=category_name, item_name=item_name))
+
     if request.method == 'POST':
         if request.form['name']:
             item.name = request.form['name']
@@ -156,6 +171,7 @@ def editItem(category_name, item_name):
 @app.route(
     "/catalog/<string:category_name>/<string:item_name>/delete",
     methods=['GET', 'POST'])
+@login_required
 def deleteItem(category_name, item_name):
     """
     Delete Item page
@@ -167,11 +183,18 @@ def deleteItem(category_name, item_name):
        A redirect to category when deleted.
        A render template for the delete item page.
     """
-    if 'username' not in login_session:
-        return redirect('/login')
+    #if 'username' not in login_session:
+    #    return redirect('/login')
     category = session.query(Category).filter_by(name=category_name).one()
 
     item = session.query(Item).filter_by(name=item_name).one()
+
+    if item.category_id != login_session['username']:
+        flash('You cannot delete %s' % item.name)
+        return redirect(url_for(
+            'showItem',
+            category_name=category_name, item_name=item_name))
+
 
     if request.method == 'POST':
         session.delete(item)
@@ -182,6 +205,7 @@ def deleteItem(category_name, item_name):
 
 
 @app.route("/catalog/new", methods=['GET', 'POST'])
+@login_required
 def newItem():
     """
     Makes a new item in the catalog
@@ -191,8 +215,8 @@ def newItem():
         A redirect to catalog once commited.
         A render_template for new item page.
     """
-    if 'username' not in login_session:
-        return redirect('/login')
+    #if 'username' not in login_session:
+    #    return redirect('/login')
     categories = session.query(Category).order_by(asc(Category.name))
     if request.method == 'POST':
         requestName = request.form['category_name']

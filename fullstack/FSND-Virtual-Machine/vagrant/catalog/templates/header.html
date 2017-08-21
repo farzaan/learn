@@ -1,3 +1,4 @@
+<!doctype html>
 <div class="row top-menu">
 		<div class="main-header">
 		<p>
@@ -21,6 +22,18 @@
 				{% endif %}
 			
 		</p>
+		</div>
+		<div>
+			{% with messages = get_flashed_messages() %}
+			  {% if messages %}
+			  <p>Error:</p>
+			    <ul class=flashes>
+			    {% for message in messages %}
+			      <li>{{ message }}</li>
+			    {% endfor %}
+			    </ul>
+			  {% endif %}
+			{% endwith %}
 		</div>
 	
 
