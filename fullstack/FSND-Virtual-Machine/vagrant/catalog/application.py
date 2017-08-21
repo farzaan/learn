@@ -11,6 +11,7 @@ import string
 
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
+from functools import wraps
 import httplib2
 import json
 from flask import make_response
@@ -39,11 +40,14 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+def login_required(f):
+    @wraps(f)
+    def decorated_function 
+
 
 @app.route("/")
 @app.route("/catalog/")
 def showCatalog():
-    print("Inside showCatalog")
     categories = session.query(Category).order_by(asc(Category.name))
     items = session.query(Item).order_by(desc(Item.id)).limit(10)
     if 'username' in login_session:
@@ -64,6 +68,13 @@ def showCatalog():
 
 @app.route("/catalog/<string:cat_name>/items")
 def showCategory(cat_name):
+    """
+    Show category and items of category
+    Keyword arguments:
+    cat_name -- name of the category
+    Returns:
+        A render_template of the category page
+    """
     categories = session.query(Category).order_by(asc(Category.name))
     category = session.query(Category).filter_by(name=cat_name).one()
     items = session.query(Item).filter_by(category_id=category.id)
@@ -80,6 +91,14 @@ def showCategory(cat_name):
 
 @app.route("/catalog/<string:category_name>/<string:item_name>")
 def showItem(category_name, item_name):
+    """
+    Show item name and description
+    Keyword arguments:
+    category_name -- Name of the catgory of the item to be deleted.
+    item_name -- Name of item to be deleted.
+    Returns:
+        A render_template for item page with and without edit and delete
+    """
     category = session.query(Category).filter_by(name=category_name).one()
     item = session.query(Item).filter_by(name=item_name).one()
     # items = session.query(Item).filter_by(category_id=category.id)
@@ -102,6 +121,16 @@ def showItem(category_name, item_name):
     "/catalog/<string:category_name>/<string:item_name>/edit",
     methods=['GET', 'POST'])
 def editItem(category_name, item_name):
+    """
+    Edit item page.
+    Keyword arguments:
+    category_name -- Name of the catgory of the item to be deleted.
+    item_name -- Name of item to be deleted.
+    Returns:
+        if not logged in redirects to login page
+       A redirect to category when edited.
+       A render template for the edit item page.
+    """
     if 'username' not in login_session:
         return redirect('/login')
     category = session.query(Category).filter_by(name=category_name).one()
@@ -128,6 +157,16 @@ def editItem(category_name, item_name):
     "/catalog/<string:category_name>/<string:item_name>/delete",
     methods=['GET', 'POST'])
 def deleteItem(category_name, item_name):
+    """
+    Delete Item page
+    Keyword arguments:
+    category_name -- Name of the catgory of the item to be deleted.
+    item_name -- Name of item to be deleted.
+    Returns:
+       if not logged in redirects to login page
+       A redirect to category when deleted.
+       A render template for the delete item page.
+    """
     if 'username' not in login_session:
         return redirect('/login')
     category = session.query(Category).filter_by(name=category_name).one()
@@ -144,15 +183,21 @@ def deleteItem(category_name, item_name):
 
 @app.route("/catalog/new", methods=['GET', 'POST'])
 def newItem():
+    """
+    Makes a new item in the catalog
+    Keyword arguments:
+    None
+    Returns:
+        A redirect to catalog once commited.
+        A render_template for new item page.
+    """
     if 'username' not in login_session:
-        print('Get Lost')
         return redirect('/login')
     categories = session.query(Category).order_by(asc(Category.name))
     if request.method == 'POST':
         requestName = request.form['category_name']
-        print(requestName)
         requestId = session.query(Category).filter_by(name=requestName).one()
-        print(requestId.id)
+
         newItem = Item(
             name=request.form['name'],
             description=request.form['description'],
@@ -167,18 +212,32 @@ def newItem():
 
 @app.route('/login/')
 def showLogin():
-        state = ''.join(
-            random.choice(
-                string.ascii_uppercase + string.digits
-                )
-            for x in xrange(32)
+    """
+    Forms state token and displays login page.
+    Keyword arguments:
+    None
+    Returns:
+        A render_template of the login page.
+    """
+    state = ''.join(
+        random.choice(
+            string.ascii_uppercase + string.digits
             )
-        login_session['state'] = state
-        return render_template('login.html', STATE=state)
+        for x in xrange(32)
+        )
+    login_session['state'] = state
+    return render_template('login.html', STATE=state)
 
 
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
+    """
+    Log in the selected user
+    Keyword arguments:
+    None
+    Returns:
+        Response containing username and picture.
+    """
     if request.args.get('state') != login_session['state']:
         response = make_response(json.dumps('Invalid state parameter.'), 401)
         response.headers['Content-Type'] = 'application/json'
@@ -264,6 +323,13 @@ def gconnect():
 
 @app.route('/gdisconnect')
 def gdisconnect():
+    """
+    Logs out the connected user
+    Keyword arguments:
+    None
+    Returns:
+        Output containing status of log-out.
+    """
     access_token = login_session.get('access_token')
     if access_token is None:
         print 'Access Token is None'
@@ -298,8 +364,14 @@ def gdisconnect():
 
 @app.route("/catalog.json")
 def catalogJSON():
+    """
+    Creates a json endpoint for catalog.db
+    Keyword arguments:
+    None
+    Returns:
+        A response containing JSON serialized output.
+    """
     categories = session.query(Category).order_by(asc(Category.name))
-    # d= { 'Activity': { 'Subactivity': { 'Subsubactivity': 'value }}}
     output = {}
     categories_json = {}
     for category in categories:
