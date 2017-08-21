@@ -28,7 +28,7 @@ sqlite3 catalog.db
 + To start the web application run 
 
 ```
-python database.py
+python application.py
 ```
 
 ## How to Run
