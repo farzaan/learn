@@ -26,6 +26,8 @@ function loadData() {
 
     strNYAPIKey = "0c5e018731cf44268c73430cc664e55f"
 
+    //strNYAPIKey = 'badkey'
+
     var nyTimesURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json";    
     nyTimesURL = nyTimesURL + '?q=' + cityVal + '&sort=newest&api-key=' + strNYAPIKey;
 
@@ -41,6 +43,9 @@ function loadData() {
                 '<p>' + article.snippet + '</p>' +
                 '</li>');
         };
+    }).error(function(e){
+        console.log(e)
+        $nytHeaderElem.text('New York Times Articles Could Not Be Loaded' + e.toString());
     })
 
 
