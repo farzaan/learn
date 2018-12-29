@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=PlanetGravity
+comment0.text=\r\n\ Find\ the\ gravity\ force\ on\ different\ planets\ \r\n\r\n\ @author\ Syed\ Nasar\r\n\ \r\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=diameter\ mass
+comment2.target=double\ gravityMeth(double,\ double)
+comment3.params=planets\ diameter\ mass\ gravityList
+comment3.target=void\ printer(java.lang.String[],\ double[],\ double[],\ double[])
+numComments=4

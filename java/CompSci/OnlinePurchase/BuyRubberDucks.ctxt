@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=BuyRubberDucks
+comment0.text=\r\n\ The\ purpose\ of\ the\ program\ was\ to\ make\ a\ receipt\ program\ using\ strings\ and\ inputs\r\n\r\n\ @author\ Farzaan\ Nasar\r\n\ @version\ 9/24/18\r\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+numComments=2
