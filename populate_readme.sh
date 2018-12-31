@@ -1,3 +1,3 @@
 for d in */ ; do
-    echo "[$d]($d)" >> README.md
+    echo "* [$d]($d)" >> README.md
 done

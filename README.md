@@ -10,11 +10,4 @@ Code and projects from Coursera courses in Java
 
 ### 
 
-[code/](code/)
-[fullstack/](fullstack/)
-[java-coursera/](java-coursera/)
-[java/](java/)
-[nodejs/](nodejs/)
-[python-coursera/](python-coursera/)
-[python/](python/)
-[web/](web/)
+
